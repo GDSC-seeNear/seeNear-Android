@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.kgg.android.seenear.AuthActivity.IntroActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,8 +16,6 @@ class SplashActivity : AppCompatActivity() {
     private fun Loadingstart() {
         val handler = Handler()
         handler.postDelayed(Runnable {
-            val intent = Intent(applicationContext, IntroActivity::class.java)
-            startActivity(intent)
             finish()
         }, 2000)
     }

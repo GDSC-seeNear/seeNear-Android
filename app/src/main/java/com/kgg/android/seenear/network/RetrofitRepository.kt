@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.kgg.android.seenear.network.data.AuthorizationHeader
 import com.kgg.android.seenear.network.data.loginResponse
+import com.kgg.android.seenear.network.data.myInfoResponse
 import com.kgg.android.seenear.network.data.signupResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -23,35 +24,23 @@ import retrofit2.converter.gson.GsonConverterFactory // data Json을 자바에�
 
 class RetrofitRepository {
 
+    val tokenResponse: MutableLiveData<String> = MutableLiveData()
+
     // 토큰 테스트
-    fun tokenTest(accessToken : String): MutableLiveData<String> {
+    fun tokenTest(accessToken : String) {
 
-        val tokenResponse: MutableLiveData<String> = MutableLiveData()
 
-        val callApi = RetrofitInterface.RetrofitInstance.api.tokenTest(accessToken)
-        callApi.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful()) { // <--> response.code == 200
-                    // 성공 처리
-                    response.body()?.let {
-                        Log.d("request Id in success :", response.code().toString())
-                        tokenResponse.value = it
-                    }
-                } else { // code == 401
-                    // 실패 처리
-                    response.body()?.let {
-                        Log.d("request Id in not :", response.code().toString())
-                    }
-                }
-            }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("request Id in failure :", t.message.toString())
-            }
-        })
+
+    }
+
+    // 본인 정보 가져오기
+    fun myInfo(accessToken : String): MutableLiveData<String> {
+
 
         return tokenResponse
     }
+
 
 }
 //    // 인증 메세지 전송

@@ -17,10 +17,10 @@ data class Poi(
     val frontLon: Float = 0.0f,
 
     //중심점 위도 좌표
-    val noorLat: Float = 0.0f,
+    val noorLat: Double = 0.0,
 
     //중심점 경도 좌표
-    val noorLon: Float = 0.0f,
+    val noorLon: Double = 0.0,
 
     //표출 주소 대분류명
     val upperAddrName: String? = null,

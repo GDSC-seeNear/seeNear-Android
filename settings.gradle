@@ -3,6 +3,11 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url "https://huggingface.co/maven/" }
+        maven {
+            url "https://google.bintray.com/tensorflow"
+        }
 
     }
 }
@@ -16,3 +21,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "seeNear"
 include ':app'
+include ':chatlibrary'

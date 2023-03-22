@@ -6,16 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.kgg.android.seenear.App
 import com.kgg.android.seenear.R
-import com.kgg.android.seenear.UserActivity.usersignup.UserSignupActivity
-import com.kgg.android.seenear.UserActivity.usersignup.UserSignupActivity2
+import com.kgg.android.seenear.SignupActivity
 import com.kgg.android.seenear.databinding.ActivityRegister1Binding
-import com.kgg.android.seenear.databinding.ActivityUserSignupBinding
 import com.kgg.android.seenear.network.RetrofitInterface
-import com.kgg.android.seenear.network.data.checkValRequest
-import com.kgg.android.seenear.network.data.checkValResponse
+import com.kgg.android.seenear.network.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,12 +27,11 @@ class RegisterActivity1 : AppCompatActivity() {
 
 
     private val smsAuthApi by lazy {
-        RetrofitInterface.RetrofitInstance.api
+        RetrofitInterface.createForImport()
     }
 
     companion object{
-        var phoneNum : String ?= null
-        var signUpToken : String ?= null
+        var userInfo : checkRegisterResponse? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +45,7 @@ class RegisterActivity1 : AppCompatActivity() {
         val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         bottomSheetDialog.setContentView(bottomSheetView)
         val userCheckBtn = bottomSheetDialog.findViewById<ImageView>(R.id.userCheckBtn)
-        val userInfo_text = bottomSheetDialog.findViewById<EditText>(R.id.userInfo_text)
+        val userInfo_text = bottomSheetDialog.findViewById<TextView>(R.id.userInfo_text)
 
         // 인증 메세지 전송
         fun sendSMS(phoneNum : String) {
@@ -77,33 +75,39 @@ class RegisterActivity1 : AppCompatActivity() {
             )
         }
 
-        // 코드 유효성 검사
-        fun checkVal(phoneNumber : String, certificationNumber : String) {
+        // 보호대상 등록 체크
+        fun checkResister(phoneNumber : String, certificationNumber : String) {
 
             Log.d("checkVal?","phoneNumber: " + phoneNumber)
             Log.d("checkVal?","certificationNumber: " + certificationNumber)
 
-            val checkValRequest = checkValRequest(phoneNumber = phoneNumber, certificationNumber = certificationNumber)
-            val callApi = smsAuthApi.checkVal(checkValRequest)
-            callApi.enqueue(object : Callback<checkValResponse> {
-                override fun onResponse(call: Call<checkValResponse>, response: Response<checkValResponse>) {
+            val checkRegisterRequest = checkRegisterRequest(phoneNumber = phoneNumber, certificationNumber = certificationNumber)
+            val AuthorizationHeader = "Bearer " + App.prefs.refreshToken
+            Log.d("checkVal?","AuthorizationHeader: " + AuthorizationHeader)
+
+            val callApi = smsAuthApi.checkResister(AuthorizationHeader, checkRegisterRequest)
+            callApi.enqueue(object : Callback<checkRegisterResponse> {
+                override fun onResponse(call: Call<checkRegisterResponse>, response: Response<checkRegisterResponse>) {
                     if (response.isSuccessful()) { // <--> response.code == 200
                         // 성공 처리
                         response.body()?.let{
-                            Log.d("signUpToken :", it.signUpToken.toString())
-                            UserSignupActivity.signUpToken = it.signUpToken.toString()
+                            Log.d("signUpToken :", it.name.toString())
+                            bottomSheetDialog.show()
+                            userInfo_text?.text = it.name.toString()
+                            userInfo = it
                         }
 
-                        bottomSheetDialog.show()
+
 
                     } else { // code == 401
                         // 실패 처리
-                        Log.d("onFailure :", "else")
+                        Log.d("onResponse else :", response.code().toString())
+                        Log.d("onResponse else :", response.message().toString())
 
                     }
                 }
-                override fun onFailure(call: Call<checkValResponse>, t: Throwable) {
-                    Log.d("onFailure :", "onFailure")
+                override fun onFailure(call: Call<checkRegisterResponse>, t: Throwable) {
+                    Log.d("onFailure :", t.message.toString())
 
                 }
             }
@@ -112,8 +116,8 @@ class RegisterActivity1 : AppCompatActivity() {
 
         binding.sendText.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
-                UserSignupActivity.phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ UserSignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
+                SignupActivity.phoneNum = binding.phoneEdittext.text.toString()
+                Toast.makeText(this, "휴대폰 번호: "+ SignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
@@ -122,8 +126,8 @@ class RegisterActivity1 : AppCompatActivity() {
         }
         binding.sendBtn.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
-                UserSignupActivity.phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ UserSignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
+                SignupActivity.phoneNum = binding.phoneEdittext.text.toString()
+                Toast.makeText(this, "휴대폰 번호: "+ SignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
@@ -134,20 +138,19 @@ class RegisterActivity1 : AppCompatActivity() {
 
         binding.registerBtn.setOnClickListener {
             if (binding.numberEdittext.text.length ==4){
-                checkVal(UserSignupActivity.phoneNum!!, binding.numberEdittext.text.toString())
+                checkResister(SignupActivity.phoneNum!!, binding.numberEdittext.text.toString())
             }
         }
 
         binding.registText.setOnClickListener {
             if (binding.numberEdittext.text.length ==4){
-                checkVal(UserSignupActivity.phoneNum!!, binding.numberEdittext.text.toString())
+                checkResister(SignupActivity.phoneNum!!, binding.numberEdittext.text.toString())
             }
         }
 
 
         userCheckBtn?.setOnClickListener {
             val intent = Intent(this, RegisterActivity2::class.java)
-            intent.putExtra("phoneNum", phoneNum)
             startActivity(intent)
         }
 

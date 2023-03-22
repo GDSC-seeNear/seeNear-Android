@@ -6,6 +6,7 @@
     android:id="@+id/bottomSheetDashBoard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:behavior_draggable="true"
     app:behavior_hideable="true"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -20,7 +21,8 @@
         android:background="@drawable/round_edittext_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
     <TextView
         android:id="@+id/textView37"
@@ -35,14 +37,6 @@
         app:layout_constraintStart_toStartOf="@+id/userCheckBtn"
         app:layout_constraintTop_toTopOf="@+id/userCheckBtn" />
 
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout8"
         android:layout_width="0dp"
@@ -54,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView36">
 
-        <EditText
+        <TextView
             android:id="@+id/userInfo_text"
             android:layout_width="0dp"
             android:layout_height="0dp"

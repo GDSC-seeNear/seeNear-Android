@@ -16,7 +16,7 @@
         android:elevation="20dp">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/medicine_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

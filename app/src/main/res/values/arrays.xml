@@ -11,4 +11,14 @@
             <item>지인</item>
     </string-array>
 
+    <string-array name="period">
+        <item>1일 1회</item>
+        <item>1일 2회</item>
+        <item>1일 3회</item>
+        <item>2일 1회</item>
+        <item>3일 1회</item>
+        <item>일주일 1회</item>
+    </string-array>
+
+
 </resources>

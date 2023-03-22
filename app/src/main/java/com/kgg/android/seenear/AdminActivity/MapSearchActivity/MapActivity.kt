@@ -320,8 +320,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         override fun onLocationChanged(location: Location) {
             // 현재 위치 콜백
             val locationLatLngEntity = LocationLatLngEntity(
-                location.latitude.toFloat(),
-                location.longitude.toFloat()
+                location.latitude.toDouble(),
+                location.longitude.toDouble()
             )
 
             onCurrentLocationChanged(locationLatLngEntity)

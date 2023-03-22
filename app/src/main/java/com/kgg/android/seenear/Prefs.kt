@@ -23,5 +23,20 @@ class Prefs(context: Context) { // Preference Class 생성 후 preference 인스
         set(value){
             prefs.edit().putString("refreshToken",value).apply()
         }
+
+
+    var role:String?
+        get() = prefs.getString("role", null)
+        set(value){
+            prefs.edit().putString("role",value).apply()
+        }
+
+    var id:Int?
+        get() = prefs.getInt("id", 0)
+        set(value){
+            if (value != null) {
+                prefs.edit().putInt("id",value).apply()
+            }
+        }
 }
 

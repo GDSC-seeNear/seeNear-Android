@@ -10,6 +10,6 @@ class AdminMainViewModelFactory (
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return UserMainViewModel(repository) as T
+        return AdminMainViewModel(repository) as T
     }
 }

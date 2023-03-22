@@ -7,15 +7,18 @@ package com.kgg.android.seenear
 //import java.nio.ByteOrder
 //import java.nio.channels.FileChannel
 //import org.tensorflow.lite.Interpreter
-//import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 //import java.io.FileInputStream
 //import java.nio.channels.Channels
-
+//import org.tensorflow.lite.support.tokenizer.Tokenizer
+//import org.tensorflow.lite.support.tokenizer.TokenizerOptions
+//import org.tensorflow.lite.support.tokenizer.vocab.BertVocab
+//import org.tensorflow.lite.support.tokenizer.vocab.Vocab
+//
+//
 //class chatGPT2  : Application() {
 //
-//
 //    // Prepare input data
-//    val input = prepareInputData("Hello, how are you?")
+//    val input = prepareInputData("Hello, how are you?", )
 //
 //    // Allocate output buffer
 //    val outputSize = 1024 // Set the maximum length of the output

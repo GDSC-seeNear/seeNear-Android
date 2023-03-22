@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".UserActivity.usersignup.UserSignupActivity">
+        tools:context=".UserSignupActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar2"
@@ -82,13 +82,15 @@
                         android:layout_marginTop="8dp"
                         android:background="@drawable/round_edittext">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/name_edittext"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:background="#00FFFFFF"
+                            android:foregroundGravity="center_vertical"
+                            android:gravity="center_vertical"
                             android:inputType="text"
                             android:maxLength="10"
                             android:textSize="14dp"
@@ -241,7 +243,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/relation_text_1"
@@ -266,7 +269,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
 
                             <EditText
@@ -304,7 +308,7 @@
                                 android:background="#00FFFFFF"
                                 android:hint="@string/family_phone"
                                 android:inputType="phone"
-                                android:maxLength="10"
+                                android:maxLength="11"
                                 android:textSize="14dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -328,7 +332,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/relation_text_2"
@@ -353,7 +358,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
 
                             <EditText
@@ -391,7 +397,7 @@
                                 android:background="#00FFFFFF"
                                 android:hint="@string/family_phone"
                                 android:inputType="phone"
-                                android:maxLength="10"
+                                android:maxLength="11"
                                 android:textSize="14dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -415,7 +421,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/relation_text_3"
@@ -440,7 +447,8 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/round_edittext">
+                            android:background="@drawable/round_edittext"
+                            android:visibility="gone">
 
 
                             <EditText
@@ -478,7 +486,7 @@
                                 android:background="#00FFFFFF"
                                 android:hint="@string/family_phone"
                                 android:inputType="phone"
-                                android:maxLength="10"
+                                android:maxLength="11"
                                 android:textSize="14dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"

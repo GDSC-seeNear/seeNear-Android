@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -23,11 +23,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UserChatActivity"
+            android:name=".UserActivity.usermodify.MedicineModifyActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminMainActivity"
+            android:name=".UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity"
             android:exported="false" />
+        <activity
+            android:name=".UserActivity.usermodify.ModifyUserMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity.admindetail.AdminDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserActivity.usermodify.ModifyUserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserActivity.userchat.UserChatActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".AdminActivity.adminmain.AdminMainActivity"
+            android:exported="true" />
         <activity
             android:name=".AdminActivity.RegisterActivity.RegisterActivity3"
             android:exported="false" />
@@ -36,10 +53,10 @@
             android:exported="false" />
         <activity
             android:name=".AdminActivity.RegisterActivity.RegisterActivity1"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".AdminActivity.RegisterActivity.RegisterActivity2"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true" />
@@ -47,7 +64,16 @@
             android:name=".AdminActivity.MapSearchActivity.MapActivity"
             android:exported="true" />
         <activity
-            android:name=".UserActivity.userlogin.UserLoginActivity"
+            android:name=".AuthActivity.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".AuthActivity.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,26 +82,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdminActivity.adminlogin.AdminLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity.adminsignup.AdminSigninActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity.usersignup.UserSignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity.usersignup.UserSignupActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".IntroActivity"
+            android:name=".UserActivity.sttActivity"
             android:exported="true" />
         <activity
-            android:name=".UserActivity.sttActivity"
-            android:exported="true"></activity>
-        <activity
             android:name=".UserActivity.usermain.UserMainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -47,6 +47,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
@@ -75,6 +76,10 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
+    implementation 'org.tensorflow:tensorflow-lite:2.8.0'
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:2.8.0'
+
+
     //    parcelize
 
     apply plugin: 'com.android.application'
@@ -82,29 +87,26 @@ dependencies {
     apply plugin: 'kotlin-parcelize'
 
 
-
-    // text 전처리를 위한 NLTK(Natural Language Toolkit) 라이브러리
-//    implementation 'com.nltk:nltk:3.5'
-
-    // transformers 라이브러리
-//    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20'
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
-//    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
-//    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.2.0'
-//    implementation 'com.google.mlkit:nl-detection:17.0.2'
-//    implementation 'com.google.mlkit:translate:16.1.0'
-//    implementation 'com.google.mlkit:image-labeling:17.0.0'
-//    implementation 'com.google.mlkit:object-detection:16.2.1'
-//    implementation 'com.google.mlkit:pose-detection:17.0.2'
-//    implementation 'com.google.mlkit:face-detection:17.1.1'
-//    implementation 'com.huggingface:transformers:4.10.0'
-
-//    implementation 'org.tensorflow:tensorflow-lite:2.6.0'
-//    implementation 'org.tensorflow:tensorflow-lite-task-nlp:2.6.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.6.0'
+    implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:2.6.0' // TensorFlow Lite Select TF Ops 버전에 맞게 변경
+    implementation group: 'org.tensorflow', name: 'tensorflow-core-platform', version: '0.2.0'
+//    implementation 'com.huggingface:transformers:4.12.0'
 //
-//    implementation 'org.tensorflow:tensorflow-lite-task-text:0.2.0'
+//    implementation 'org.tensorflow:tensorflow-lite-support:0.2.0'
+//    implementation 'org.tensorflow:tensorflow-lite-support-tokenizer:0.2.0'
+//    implementation 'com.huggingface:transformers:4.8.2'
+}
 
+task copyCustomOps(type: Copy) {
+    from(project(':').file('src/main/jniLibs'))
+    into("$buildDir/native-libs")
+    include("**/*.so")
+}
 
-
-
+task createMergedNativeLibs(type: Zip) {
+    dependsOn(copyCustomOps)
+    into('lib') {
+        from("$buildDir/native-libs")
+        from("$buildDir/intermediates/stripped_native_libs/release/out")
+    }
 }
