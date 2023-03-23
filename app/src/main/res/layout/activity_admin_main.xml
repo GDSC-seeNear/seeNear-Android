@@ -38,7 +38,9 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="대상자 등록" />
+            android:layout_marginTop="12dp"
+            android:text="대상자 등록"
+            android:textSize="14dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

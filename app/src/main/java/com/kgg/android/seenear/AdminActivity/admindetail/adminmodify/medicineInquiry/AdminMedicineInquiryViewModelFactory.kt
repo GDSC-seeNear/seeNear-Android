@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kgg.android.seenear.network.RetrofitRepository
 
-class MedicineInquiryViewModelFactory (
+class AdminMedicineInquiryViewModelFactory (
     private val repository : RetrofitRepository
 ) : ViewModelProvider.Factory {
 

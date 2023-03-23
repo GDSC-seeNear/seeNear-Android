@@ -3,25 +3,15 @@ package com.kgg.android.seenear.UserActivity.usermain
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kgg.android.seenear.App
-import com.kgg.android.seenear.AuthActivity.IntroActivity
-import com.kgg.android.seenear.AuthActivity.LoginActivity
 import com.kgg.android.seenear.UserActivity.usermodify.ModifyUserInfoActivity
-import com.kgg.android.seenear.UserActivity.usermodify.ModifyUserMedicineActivity
-import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity
+import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity
 import com.kgg.android.seenear.databinding.ActivityMainBinding
-import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.RetrofitRepository
-import com.kgg.android.seenear.network.data.registerRequest
 import com.kgg.android.seenear.network.data.registerResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserMainActivity : AppCompatActivity() {
 
@@ -65,7 +55,7 @@ class UserMainActivity : AppCompatActivity() {
         }
 
         binding.modifyPersonalMedicineBtn.setOnClickListener {
-            val intent = Intent(this, MedicineInquiryActivity::class.java)
+            val intent = Intent(this, AdminMedicineInquiryActivity::class.java)
             intent.putExtra("name", userInfo.name)
             startActivity(intent)
         }

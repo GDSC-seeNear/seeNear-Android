@@ -10,19 +10,15 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.kgg.android.seenear.AdminActivity.admindetail.AdminDetailViewModel
 import com.kgg.android.seenear.App
-import com.kgg.android.seenear.R
-import com.kgg.android.seenear.UserActivity.usermain.UserMainActivity
+import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity
 import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity
-import com.kgg.android.seenear.databinding.ActivityAdminDetailBinding
 import com.kgg.android.seenear.databinding.ActivityMedicineModifyBinding
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.data.medicine
-import com.kgg.android.seenear.network.data.medicineCreate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
-import kotlin.text.Typography.times
 
 class MedicineModifyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMedicineModifyBinding
@@ -113,7 +109,7 @@ class MedicineModifyActivity : AppCompatActivity() {
                     response.body()?.let{
                         Log.d("request Id :", it.toString())
                     }
-                    val intent = Intent(this@MedicineModifyActivity, MedicineInquiryActivity::class.java)
+                    val intent = Intent(this@MedicineModifyActivity, AdminMedicineInquiryActivity::class.java)
                     finish()
                     startActivity(intent)
                 } else { // code == 401

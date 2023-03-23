@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_icon_arrow_left.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_main_logo.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_rectangle.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_rectangle_profile.xml" value="0.1865" />
@@ -52,14 +53,14 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_stt.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_admin.xml" value="0.39158325195312504" />
-        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.3282051282051282" />
+        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.2730499267578126" />
         <entry key="app/src/main/res/layout/activity_user_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signup.xml" value="0.1870438148235452" />
         <entry key="app/src/main/res/layout/activity_user_signup2.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/bottom_navigation.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.3282051282051282" />
-        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.33229166666666665" />
+        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.22669932047526048" />
         <entry key="app/src/main/res/layout/item_recycler.xml" value="0.21367521367521367" />
         <entry key="app/src/main/res/layout/medicine_recycler.xml" value="0.2831124332149323" />
         <entry key="app/src/main/res/layout/todo_recycler.xml" value="0.38590956887486855" />

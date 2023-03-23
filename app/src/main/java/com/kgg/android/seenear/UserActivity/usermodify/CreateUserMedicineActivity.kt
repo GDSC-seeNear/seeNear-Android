@@ -1,8 +1,6 @@
 package com.kgg.android.seenear.UserActivity.usermodify
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.icu.number.Notation.simple
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +8,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.R
-import androidx.core.content.ContextCompat.startActivity
-import com.kgg.android.seenear.AdminActivity.adminmain.AdminMainActivity
 import com.kgg.android.seenear.App
-import com.kgg.android.seenear.UserActivity.usermain.UserMainActivity
 import com.kgg.android.seenear.UserActivity.usermain.UserMainViewModel
-import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity
-import com.kgg.android.seenear.databinding.ActivityModifyUserInfoBinding
+import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity
 import com.kgg.android.seenear.databinding.ActivityModifyUserMedicineBinding
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.data.medicine
@@ -27,13 +20,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
-import kotlin.text.Typography.times
 
-class ModifyUserMedicineActivity : AppCompatActivity() {
+class CreateUserMedicineActivity : AppCompatActivity() {
     private lateinit var binding: ActivityModifyUserMedicineBinding
     private lateinit var viewModel : UserMainViewModel
     private lateinit var userInfo: registerResponse
     private lateinit var medicine: medicineCreate
+    private var elderlyId: Int = 0
 
     private val smsAuthApi by lazy {
         RetrofitInterface.createForImport()
@@ -46,6 +39,7 @@ class ModifyUserMedicineActivity : AppCompatActivity() {
         binding = ActivityModifyUserMedicineBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        elderlyId = intent.getIntExtra("elderlyId",0)
         medicine = medicineCreate()
         medicine.period = 24
 
@@ -89,7 +83,7 @@ class ModifyUserMedicineActivity : AppCompatActivity() {
         binding.registText.setOnClickListener {
 
             if (binding.medicineEdittext1.text!!.length>0){
-                medicine.elderlyId = App.prefs.id!!
+                medicine.elderlyId = elderlyId
                 medicine.name = binding.medicineEdittext1.text!!.toString()
                 Log.e("medicine!!!", medicine.toString())
                 register(medicine)
@@ -111,11 +105,11 @@ class ModifyUserMedicineActivity : AppCompatActivity() {
             override fun onResponse(call: Call< medicine>, response: Response< medicine>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(this@ModifyUserMedicineActivity, "약 복용 정보 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CreateUserMedicineActivity, "약 복용 정보 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     response.body()?.let{
                         Log.d("request Id :", it.toString())
                     }
-                    val intent = Intent(this@ModifyUserMedicineActivity, MedicineInquiryActivity::class.java)
+                    val intent = Intent(this@CreateUserMedicineActivity, AdminMedicineInquiryActivity::class.java)
                     startActivity(intent)
                 } else { // code == 401
                     // 실패 처리

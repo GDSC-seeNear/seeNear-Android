@@ -26,10 +26,10 @@
             android:name=".UserActivity.usermodify.MedicineModifyActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity"
+            android:name=".UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity.usermodify.ModifyUserMedicineActivity"
+            android:name=".UserActivity.usermodify.CreateUserMedicineActivity"
             android:exported="false" />
         <activity
             android:name=".AdminActivity.admindetail.AdminDetailActivity"

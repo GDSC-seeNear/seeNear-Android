@@ -23,12 +23,12 @@ import com.kgg.android.seenear.network.RetrofitRepository
 import com.kgg.android.seenear.network.data.medicine
 import com.kgg.android.seenear.network.data.registerResponse
 
-class MedicineInquiryActivity : AppCompatActivity() {
+class AdminMedicineInquiryActivity : AppCompatActivity() {
 
     val datas = mutableListOf<medicine>()
     lateinit var userList: List<registerResponse>
     private lateinit var binding: ActivityMedicineInquiryBinding
-    private lateinit var viewModel : MedicineInquiryViewModel
+    private lateinit var viewModel : AdminMedicineInquiryViewModel
     lateinit var medicineAdapter: MedicineAdapter
 
     companion object{
@@ -40,24 +40,26 @@ class MedicineInquiryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMedicineInquiryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var elderly_id = intent.getIntExtra("elderlyId", 0)
+
 
         binding.userName.text = intent.getStringExtra("name") + " 님의"
 
         val repository = RetrofitRepository()
-        val viewModelFactory = MedicineInquiryViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(MedicineInquiryViewModel::class.java)
+        val viewModelFactory = AdminMedicineInquiryViewModelFactory(repository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(AdminMedicineInquiryViewModel::class.java)
         viewModel.medicineList.observe(this, Observer {
             Log.d("medicineList",it.toString())
             datas.addAll(it)
             medicineAdapter.notifyDataSetChanged()
         })
-        App.prefs.refreshToken?.let { viewModel.medicineInquiry(it) }
+        App.prefs.refreshToken?.let { viewModel.medicineInquiry(it, elderly_id = elderly_id) }
 
         initRecycler()
 
         binding.medicineCreate.setOnClickListener {
-            val intent = Intent(this, CreateUserMedicineActivity::class.java)
-            intent.putExtra("elderlyId", App.prefs.id)
+            val intent = Intent(this@AdminMedicineInquiryActivity, CreateUserMedicineActivity::class.java)
+            intent.putExtra("elderlyId", elderly_id)
             startActivity(intent)
         }
     }
@@ -130,7 +132,7 @@ class MedicineInquiryActivity : AppCompatActivity() {
                 itemViewBtn.setOnClickListener {
                     val selectedItem = datas[position]
                     medicine = selectedItem
-                    val intent = Intent(this@MedicineInquiryActivity, MedicineModifyActivity::class.java)
+                    val intent = Intent(this@AdminMedicineInquiryActivity, MedicineModifyActivity::class.java)
                     startActivity(intent)
                 }
             }

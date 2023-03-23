@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_date"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chat_date">
@@ -63,14 +64,14 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/finderLogo"
+                android:id="@+id/chatLogo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:background="@drawable/create_photo_background"
                 android:foregroundGravity="bottom"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_gray_profile" />
+                app:srcCompat="@drawable/ic_main_logo" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -113,36 +114,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:layout_marginStart="-55dp"
-            android:layout_marginBottom="2dp"
-            android:foregroundGravity="left"
-            android:gravity="bottom|left"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/readCheck_partner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left"
-                android:foregroundGravity="left"
-                android:gravity="left"
-                android:text="읽음"
-                android:textSize="8dp"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/chat_time_text_partner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="오후 1:13"
-                android:textSize="8dp" />
-        </LinearLayout>
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -161,36 +132,6 @@
             android:paddingStart="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom|right"
-                android:layout_marginRight="6dp"
-                android:foregroundGravity="left"
-                android:gravity="bottom|right"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/readCheck_me"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|left"
-                    android:foregroundGravity="left"
-                    android:gravity="right"
-                    android:text="읽음"
-                    android:textSize="8dp"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/chat_time_text_me"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:text="오후 1:13"
-                    android:textSize="8dp" />
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/my_message_text"
