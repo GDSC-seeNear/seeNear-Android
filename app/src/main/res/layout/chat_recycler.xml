@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="gone">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_date"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -84,6 +84,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading_bar"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="loading2.json"
+                app:lottie_loop="true" />
+
             <TextView
                 android:id="@+id/partner_message_text"
                 android:layout_width="wrap_content"
@@ -100,17 +108,7 @@
                 android:paddingBottom="8dp"
                 android:text="상대 메시지"
                 android:textSize="12dp"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/partner_message_photo"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="40dp"
-                android:visibility="gone"
-                app:srcCompat="@drawable/chatting_partner" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -119,8 +117,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/my_message"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chat_date">
@@ -148,16 +148,6 @@
                 android:text="내 메시지"
                 android:textSize="12dp"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/my_message_photo"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone"
-                app:srcCompat="@drawable/chatting_me" />
 
         </LinearLayout>
 

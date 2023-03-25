@@ -9,6 +9,6 @@ class MedicineInquiryViewModelFactory (
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AdminMedicineInquiryViewModel(repository) as T
+        return MedicineInquiryViewModel(repository) as T
     }
 }

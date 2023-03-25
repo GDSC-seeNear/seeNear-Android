@@ -31,7 +31,8 @@ class RegisterActivity2 : AppCompatActivity() {
     // Admin의 User 등록 - 2
 
     private lateinit var binding: ActivityRegister2Binding
-    private lateinit var userInfo : registerRequest
+    private lateinit var userInfo : registerResponse
+
 
     val REQUEST_CODE = 100
 
@@ -49,7 +50,7 @@ class RegisterActivity2 : AppCompatActivity() {
         binding = ActivityRegister2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userInfo = registerRequest(
+        userInfo = registerResponse(
             RegisterActivity1.userInfo?.id,
             RegisterActivity1.userInfo?.phoneNumber,
             RegisterActivity1.userInfo?.name,
@@ -176,7 +177,7 @@ class RegisterActivity2 : AppCompatActivity() {
     fun register() {
 
 
-        val AuthorizationHeader = "Bearer " + App.prefs.refreshToken
+        val AuthorizationHeader = "Bearer " + App.prefs.accessToken
         Log.d("AuthorizationHeader :", AuthorizationHeader.toString())
         Log.d("userInfo :", userInfo.toString())
         val callApi = smsAuthApi.register(authorizationHeader = AuthorizationHeader, checkRegisterRequest =  userInfo)

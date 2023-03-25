@@ -2,21 +2,21 @@ package com.kgg.android.seenear.network
 
 import com.google.gson.GsonBuilder
 import com.kgg.android.seenear.network.data.chatRequest
+import com.kgg.android.seenear.network.data.chatResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
-interface RetrofitChatInterface {
+interface ChatInterface {
 
     companion object {
 
-        private val BASE_URL = "http://34.28.253.42:9999"
+        private val BASE_URL = "http://34.69.139.242:9999"
 
-        fun createForImportChat(): RetrofitChatInterface {
+        fun createForImportChat(): ChatInterface {
 
             val interceptor = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -42,12 +42,13 @@ interface RetrofitChatInterface {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-            return retrofit.create(RetrofitChatInterface::class.java)
+            return retrofit.create(ChatInterface::class.java)
         }
     }
 
-    //sms 발송
+    //chat 발송
     @POST(".")
     fun sendChat(@Body contents: chatRequest): Call<String> // body X
+
 
 }

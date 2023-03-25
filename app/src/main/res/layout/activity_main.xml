@@ -66,122 +66,130 @@
                 android:orientation="vertical" >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/modifyPersonalInfoBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="48dp"
-                    android:background="@drawable/round_edittext_green"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/modifyPersonalInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="개인정보 수정"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="48dp"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/textView5"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/modifyPersonalInfoBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="오늘 할 일"
-                        android:textColor="#10542F"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp" />
-
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/modifyPersonalMedicineBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="48dp"
-                    android:background="@drawable/round_edittext_green"
-                    tools:layout_editor_absoluteY="586dp">
-
-                    <TextView
-                        android:id="@+id/modifyPersonalMedicine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="약 복용 정보 조회"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="48dp"
-                    android:layout_marginBottom="32dp"
-                    android:background="@drawable/ic_chatbtn"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="48dp"
                         android:layout_marginTop="32dp"
-                        android:text="너굴맨\n채팅하기"
-                        android:textColor="#353535"
-                        android:textSize="36dp"
-                        android:textStyle="bold"
+                        android:layout_marginEnd="48dp"
+                        android:background="@drawable/round_edittext_green"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/modifyPersonalInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="개인정보 수정"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="48dp"
+                        android:layout_marginTop="64dp"
+                        android:layout_marginEnd="48dp"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="오늘 할 일"
+                            android:textColor="#10542F"
+                            android:textSize="24dp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/modifyPersonalMedicineBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="48dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="48dp"
+                        android:background="@drawable/round_edittext_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/modifyPersonalInfoBtn">
+
+                        <TextView
+                            android:id="@+id/modifyPersonalMedicine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="약 복용 정보 조회"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/chatbotBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_marginStart="48dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="48dp"
+                        android:layout_marginBottom="32dp"
+                        android:background="@drawable/ic_chatbtn"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/modifyPersonalMedicineBtn">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="32dp"
+                            android:text="너굴맨\n채팅하기"
+                            android:textColor="#353535"
+                            android:textSize="36dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ImageView
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="-48dp"
-                        android:layout_marginBottom="-24dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-                        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                        android:layout_marginBottom="-48dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/chatbotBtn"
+                        app:layout_constraintEnd_toEndOf="@+id/chatbotBtn"
                         app:srcCompat="@drawable/ic_guri_logo" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
         </ScrollView>
 

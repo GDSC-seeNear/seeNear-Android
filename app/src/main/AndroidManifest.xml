@@ -26,7 +26,7 @@
             android:name=".UserActivity.usermodify.MedicineModifyActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity"
+            android:name=".UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity"
             android:exported="false" />
         <activity
             android:name=".UserActivity.usermodify.CreateUserMedicineActivity"

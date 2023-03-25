@@ -10,15 +10,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
+import androidx.room.jarjarred.org.antlr.v4.runtime.misc.MurmurHash.finish
 import com.google.android.gms.common.config.GservicesValue.value
 import com.kgg.android.seenear.AdminActivity.MapSearchActivity.SearchActivity
 import com.kgg.android.seenear.AdminActivity.RegisterActivity.RegisterActivity2.Companion.fullAddress
+import com.kgg.android.seenear.AdminActivity.admindetail.AdminDetailActivity
 import com.kgg.android.seenear.AdminActivity.adminmain.AdminMainActivity
 import com.kgg.android.seenear.App
 import com.kgg.android.seenear.UserActivity.usermain.UserMainActivity
 import com.kgg.android.seenear.UserActivity.usermain.UserMainViewModel
 import com.kgg.android.seenear.databinding.ActivityModifyUserInfoBinding
 import com.kgg.android.seenear.network.RetrofitInterface
+import com.kgg.android.seenear.network.data.AuthorizationHeader
 import com.kgg.android.seenear.network.data.registerRequest
 import com.kgg.android.seenear.network.data.registerResponse
 import kotlinx.coroutines.launch
@@ -34,6 +37,7 @@ class ModifyUserInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityModifyUserInfoBinding
     private lateinit var viewModel : UserMainViewModel
     private lateinit var userInfo: registerResponse
+    var elderlyId: Int = 0
 
     val REQUEST_CODE = 100
 
@@ -47,7 +51,13 @@ class ModifyUserInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityModifyUserInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        userInfo = UserMainActivity.userInfo
+        if(App.prefs.role.equals("user"))
+            userInfo = UserMainActivity.userInfo
+        else
+            userInfo = AdminDetailActivity.userInfo
+
+
+        elderlyId = intent.getIntExtra("elderlyId", 0)
 
         binding.nameEdittext.text = userInfo.name
         binding.birthEdittext.text = userInfo.birth
@@ -86,7 +96,7 @@ class ModifyUserInfoActivity : AppCompatActivity() {
             userInfo.emergencyPhoneNumber = phoneList
             userInfo.addressDetail = binding.homeDetailEdittext.text.toString()
 
-            App.prefs.refreshToken?.let { it1 -> modifyUserInfo(it1, userInfo) }
+            App.prefs.accessToken?.let { it1 -> modifyUserInfo(it1, userInfo) }
         }
     }
 
@@ -113,13 +123,15 @@ class ModifyUserInfoActivity : AppCompatActivity() {
 
 
     // 인증 메세지 전송
-    fun modifyUserInfo(accessToken: String, userInfo: registerResponse) {
+    fun modifyUserInfo(accessToken: String,  userInfo: registerResponse) {
 
-        Log.d("accessToken?", accessToken)
+
 
         val AuthorizationHeader = "Bearer " + accessToken
 
-        val callApi = RetrofitInterface.createForImport().modify_myInfo(AuthorizationHeader, userInfo)
+        Log.d("accessToken?", AuthorizationHeader)
+
+        val callApi = RetrofitInterface.createForImport().register(AuthorizationHeader, userInfo)
         callApi.enqueue(object : Callback<registerResponse> {
             override fun onResponse(call: Call<registerResponse>, response: Response<registerResponse>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
@@ -127,10 +139,10 @@ class ModifyUserInfoActivity : AppCompatActivity() {
                     response.body()?.let {
                         Log.d("request Id in success :", response.code().toString())
                         Log.d("requestBody!!!", it.toString())
-                        val intent = Intent(this@ModifyUserInfoActivity, UserMainActivity::class.java)
-                        startActivity(intent)
                         finish()
-
+//                        val intent = Intent(this@ModifyUserInfoActivity, AdminDetailActivity::class.java)
+//                        intent.putExtra("elderlyId", elderlyId)
+//                        startActivity(intent)
                     }
                 } else { // code == 401
                     // 실패 처리

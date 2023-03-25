@@ -57,6 +57,12 @@ interface RetrofitInterface {
     @POST("auth/check")
     fun checkVal(@Body checkValRequest: checkValRequest) : Call<checkValResponse> // signUpToken
 
+    //refresh token
+    @POST("auth/refresh")
+    fun refreshToken(
+        @Header ("Authorization") authorizationHeader: String) : Call<signupResponse> // signUpToken
+
+
     //보호자 회원가입
     @POST("auth/elderly/signup")
     fun userSignUp(
@@ -93,7 +99,7 @@ interface RetrofitInterface {
     //보호대상 등록
     @PATCH("guardian/resister")
     fun register(@Header ("Authorization") authorizationHeader: String,
-                 @Body checkRegisterRequest: registerRequest) : Call<registerResponse> // signUpToken
+                 @Body checkRegisterRequest: registerResponse) : Call<registerResponse> // signUpToken
 
     // 보호자 본인 정보 가져오기
     @GET("guardian/me")
@@ -150,6 +156,13 @@ interface RetrofitInterface {
     fun medicineDelete(
         @Path("medicineId") medicineId: Int,
         @Header ("Authorization") authorizationHeader: String, ) : Call<String>
+
+    //chat 리스트 가져오기
+    @GET("/chat/getChatList/{elderlyId}")
+    fun getChatList(
+        @Header("Authorization") authorizationHeader: String,
+        @Path("elderlyId") elderlyId: Int,
+    ): Call<chatResponse> // body X
 
 
 }

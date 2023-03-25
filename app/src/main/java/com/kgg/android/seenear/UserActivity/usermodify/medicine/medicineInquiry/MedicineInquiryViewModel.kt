@@ -23,12 +23,12 @@ class MedicineInquiryViewModel (private val repository : RetrofitRepository) : V
     var myName: MutableLiveData<String> = MutableLiveData()
     var medicineList: MutableLiveData<List<medicine>> = MutableLiveData()
 
-    fun medicineInquiry(accessToken: String) {
+    fun medicineInquiry(accessToken: String, elderlyId: Int) {
         viewModelScope.launch {
 
             val AuthorizationHeader = "Bearer " + accessToken
 
-            val callApi = App.prefs.id?.let { RetrofitInterface.createForImport().medicineInquiry(elderlyId = it, AuthorizationHeader) }
+            val callApi = RetrofitInterface.createForImport().medicineInquiry(elderlyId = elderlyId, AuthorizationHeader)
             callApi?.enqueue(object : Callback<List<medicine>> {
                 override fun onResponse(call: Call<List<medicine>>, response: Response<List<medicine>>) {
                     if (response.isSuccessful()) { // <--> response.code == 200

@@ -82,7 +82,7 @@ class RegisterActivity1 : AppCompatActivity() {
             Log.d("checkVal?","certificationNumber: " + certificationNumber)
 
             val checkRegisterRequest = checkRegisterRequest(phoneNumber = phoneNumber, certificationNumber = certificationNumber)
-            val AuthorizationHeader = "Bearer " + App.prefs.refreshToken
+            val AuthorizationHeader = "Bearer " + App.prefs.accessToken
             Log.d("checkVal?","AuthorizationHeader: " + AuthorizationHeader)
 
             val callApi = smsAuthApi.checkResister(AuthorizationHeader, checkRegisterRequest)

@@ -1,7 +1,10 @@
 package com.kgg.android.seenear.AdminActivity.adminmain
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +27,7 @@ import com.kgg.android.seenear.AdminActivity.admindetail.AdminDetailActivity
 import com.kgg.android.seenear.App
 import com.kgg.android.seenear.AuthActivity.IntroActivity
 import com.kgg.android.seenear.R
+import com.kgg.android.seenear.UserActivity.usermain.UserMainActivity
 import com.kgg.android.seenear.data.userInfo
 import com.kgg.android.seenear.databinding.ActivityAdminMainBinding
 import com.kgg.android.seenear.network.RetrofitRepository
@@ -42,18 +46,30 @@ class AdminMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val dialog = UserMainActivity.LoadingDialog(this)
 
         val repository = RetrofitRepository()
         val viewModelFactory = AdminMainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(AdminMainViewModel::class.java)
         viewModel.myName.observe(this, Observer {
-            if (it.isNotEmpty()){
+            if (it!=null){
                 Log.d("myName",it.toString())
                 binding.myNameText.text = it + " 님의"
+                dialog.dismiss()
+            }
+            else{
+                App.prefs.refreshToken?.let { it1 -> viewModel.refreshToken(it1) }
+                dialog.show() // token을 refresh하기 위한 로딩 구현
             }
 
         })
-        App.prefs.refreshToken?.let { viewModel.myInfo(it) }
+        App.prefs.accessToken?.let { viewModel.myInfo(it) }
+
+        viewModel.tokenInfo.observe(this, Observer {
+            App.prefs.accessToken?.let { viewModel.myInfo(it) }
+            App.prefs.accessToken?.let { viewModel.managedElderly(it) }
+            dialog.dismiss()
+        })
 
 
         viewModel.userList.observe(this, Observer {
@@ -64,7 +80,7 @@ class AdminMainActivity : AppCompatActivity() {
             initRecycler()
         })
 
-        App.prefs.refreshToken?.let { viewModel.managedElderly(it) }
+        App.prefs.accessToken?.let { viewModel.managedElderly(it) }
 
 
         binding.button2.setOnClickListener {
@@ -143,4 +159,21 @@ class AdminMainActivity : AppCompatActivity() {
 
     }
 
+
+    class LoadingDialog(context: Context) : Dialog(context){
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.dialog_loading)
+
+            // 취소 불가능
+            setCancelable(false)
+
+            // 배경 투명하게 바꿔줌
+            window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        }
+
+
+    }
 }

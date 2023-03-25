@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_chat.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_chatbottom.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_chatbtn.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_detail_bg.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_guri_logo.xml" value="0.1865" />
@@ -39,7 +40,7 @@
         <entry key="app/src/main/res/layout/activity_admin_signup2.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.3402389526367187" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21238301595052073" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25998433430989576" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_map_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_medicine_inquiry.xml" value="0.42419873949890685" />
@@ -53,14 +54,15 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_stt.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_admin.xml" value="0.39158325195312504" />
-        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.2730499267578126" />
+        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.3444674107226098" />
         <entry key="app/src/main/res/layout/activity_user_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signup.xml" value="0.1870438148235452" />
         <entry key="app/src/main/res/layout/activity_user_signup2.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/bottom_navigation.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.3282051282051282" />
-        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.22669932047526048" />
+        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.47344418789478077" />
+        <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.3282051282051282" />
         <entry key="app/src/main/res/layout/item_recycler.xml" value="0.21367521367521367" />
         <entry key="app/src/main/res/layout/medicine_recycler.xml" value="0.2831124332149323" />
         <entry key="app/src/main/res/layout/todo_recycler.xml" value="0.38590956887486855" />

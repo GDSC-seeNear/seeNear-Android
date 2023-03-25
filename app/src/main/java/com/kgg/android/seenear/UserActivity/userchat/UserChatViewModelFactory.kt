@@ -1,14 +1,15 @@
-package com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry
+package com.kgg.android.seenear.UserActivity.userchat
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.kgg.android.seenear.UserActivity.usermain.UserMainViewModel
 import com.kgg.android.seenear.network.RetrofitRepository
 
-class AdminMedicineInquiryViewModelFactory (
+class UserChatViewModelFactory (
     private val repository : RetrofitRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AdminMedicineInquiryViewModel(repository) as T
+        return UserChatViewModel(repository) as T
     }
 }

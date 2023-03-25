@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +30,8 @@ class MedicineInquiryActivity : AppCompatActivity() {
     lateinit var userList: List<registerResponse>
     private lateinit var binding: ActivityMedicineInquiryBinding
     private lateinit var viewModel : MedicineInquiryViewModel
-    lateinit var medicineAdapter: MedicineAdapter
+    lateinit var medicineAdapter: MedicineInquiryActivity.MedicineAdapter
+    var elderlyId: Int = 0
 
     companion object{
         var userInfo : registerResponse = registerResponse()
@@ -40,27 +42,45 @@ class MedicineInquiryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMedicineInquiryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("lifecycle!!!", "onCreate")
 
         binding.userName.text = intent.getStringExtra("name") + " 님의"
+
+        elderlyId = intent.getIntExtra("elderlyId", 0)
+
+        Log.d("elderlyId", elderlyId.toString())
 
         val repository = RetrofitRepository()
         val viewModelFactory = MedicineInquiryViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MedicineInquiryViewModel::class.java)
         viewModel.medicineList.observe(this, Observer {
+            datas.clear()
             Log.d("medicineList",it.toString())
             datas.addAll(it)
+            initRecycler()
             medicineAdapter.notifyDataSetChanged()
         })
-        App.prefs.refreshToken?.let { viewModel.medicineInquiry(it) }
+        App.prefs.accessToken?.let { viewModel.medicineInquiry(it, elderlyId = elderlyId) }
 
         initRecycler()
 
+        // 약 복용 정보 등록
         binding.medicineCreate.setOnClickListener {
             val intent = Intent(this, CreateUserMedicineActivity::class.java)
-            intent.putExtra("elderlyId", App.prefs.id)
+            intent.putExtra("elderlyId", elderlyId)
+            Log.d("elderlyId", elderlyId.toString())
             startActivity(intent)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("lifecycle!!!", "onResume")
+
+        App.prefs.accessToken?.let { viewModel.medicineInquiry(it, elderlyId = elderlyId)}
+        medicineAdapter.notifyDataSetChanged()
+    }
+
 
     private fun initRecycler() {
         medicineAdapter = MedicineAdapter(this)
@@ -70,9 +90,9 @@ class MedicineInquiryActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = lm
         binding.recyclerView.setHasFixedSize(true)
 
+        Log.d("datas in recycler", datas.toString())
 
         datas.apply {
-            Log.d("datas in recycler", datas.toString())
             medicineAdapter.datas = datas
             medicineAdapter.notifyDataSetChanged()
 
@@ -118,7 +138,7 @@ class MedicineInquiryActivity : AppCompatActivity() {
                 }
 
                 medicine_deleteBtn.setOnClickListener {
-                    App.prefs.refreshToken?.let { it1 -> viewModel.medicineDelete(item.id, it1) }
+                    App.prefs.accessToken?.let { it1 -> viewModel.medicineDelete(item.id, it1) }
                     datas.removeAt(position)
                     notifyDataSetChanged()
                     notifyItemRemoved(position)

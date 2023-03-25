@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.kgg.android.seenear.App
 import com.kgg.android.seenear.UserActivity.usermain.UserMainViewModel
-import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.AdminMedicineInquiryActivity
 import com.kgg.android.seenear.databinding.ActivityModifyUserMedicineBinding
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.data.medicine
@@ -98,7 +97,7 @@ class CreateUserMedicineActivity : AppCompatActivity() {
     fun register( medicine : medicineCreate) {
 
 
-        val AuthorizationHeader = "Bearer " + App.prefs.refreshToken
+        val AuthorizationHeader = "Bearer " + App.prefs.accessToken
         Log.d("AuthorizationHeader :", AuthorizationHeader.toString())
         val callApi = smsAuthApi.medicineCreate(authorizationHeader = AuthorizationHeader, medicine)
         callApi.enqueue(object : Callback<medicine> {
@@ -109,8 +108,8 @@ class CreateUserMedicineActivity : AppCompatActivity() {
                     response.body()?.let{
                         Log.d("request Id :", it.toString())
                     }
-                    val intent = Intent(this@CreateUserMedicineActivity, AdminMedicineInquiryActivity::class.java)
-                    startActivity(intent)
+
+                    finish()
                 } else { // code == 401
                     // 실패 처리
                     response.body()?.let{
