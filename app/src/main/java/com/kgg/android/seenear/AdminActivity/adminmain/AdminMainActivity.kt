@@ -89,6 +89,22 @@ class AdminMainActivity : AppCompatActivity() {
         }
 
         initRecycler()
+
+        // 로그아웃
+
+        binding.logoutBtn2.setOnClickListener {
+
+            App.prefs.accessToken = null
+            App.prefs.refreshToken = null
+            App.prefs.role = null
+            App.prefs.id = null
+
+            val intent = Intent(this, IntroActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+            startActivity(intent)
+
+        }
     }
     private fun initRecycler() {
         profileAdapter = ProfileAdapter(this)

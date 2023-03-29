@@ -19,14 +19,14 @@ import android.text.Editable
 import android.text.TextUtils.substring
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -48,10 +48,7 @@ import com.kgg.android.seenear.databinding.ActivityUserChatBinding
 import com.kgg.android.seenear.network.ChatInterface
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.RetrofitRepository
-import com.kgg.android.seenear.network.data.chat
-import com.kgg.android.seenear.network.data.chatRequest
-import com.kgg.android.seenear.network.data.chatResponse
-import com.kgg.android.seenear.network.data.registerResponse
+import com.kgg.android.seenear.network.data.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocketListener
@@ -134,13 +131,38 @@ class UserChatActivity : AppCompatActivity() {
         binding.chatSendBtn.setOnClickListener {
             if (binding.chatContent.text.length>0){
 
-                val contents = chatRequest(true, binding.chatContent.text.toString(), App.prefs.id!!)
+                val contents = chatRequest(App.prefs.id!!, binding.chatContent.text.toString(), true, null)
                 binding.chatContent.text = null
 //                datas.add(chatResponse(0, App.prefs.id!!, contents.content, Timestamp(System.currentTimeMillis()).toString(), contents.is_user_send))
 //                chatList()
 //                viewModel.sendChat(contents)
 
                 viewModel.sendChatMessage(contents)
+            }
+
+        }
+
+        binding.increaseTextSizeBtn.setOnClickListener {
+            if (textSize<=32f) {
+                val adapter = binding.recyclerView.adapter
+                if (adapter is ChatAdapter) {
+                    val currentSize = textSize
+                    val newSize = currentSize + 2
+                    textSize = newSize
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+        binding.decreaseTextSizeBtn.setOnClickListener {
+            if (textSize>=12f){
+                val adapter = binding.recyclerView.adapter
+                if (adapter is ChatAdapter) {
+                    val currentSize = textSize
+                    val newSize = currentSize - 2
+                    textSize = newSize
+                    adapter.notifyDataSetChanged()
+                }
             }
 
         }
@@ -192,6 +214,10 @@ class UserChatActivity : AppCompatActivity() {
 
     }
 
+    companion object{
+        var textSize = 14f
+    }
+
 
     inner class ChatAdapter(private val context: Context) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
@@ -219,8 +245,35 @@ class UserChatActivity : AppCompatActivity() {
             private val loading_bar: LottieAnimationView = itemView.findViewById(R.id.loading_bar)
             private val chat_date: ConstraintLayout = itemView.findViewById(R.id.chat_date)
             private val chat_date_text: TextView = itemView.findViewById(R.id.chat_date_text)
+             private val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup)
+            private val positiveButton: RadioButton = itemView.findViewById(R.id.positiveButton)
+            private val negativeButton: RadioButton = itemView.findViewById(R.id.negativeButton)
 
             fun bind(item: chat) {
+
+
+                // status "네" 누르기
+
+                positiveButton.setOnClickListener {
+                    val statusCheckRequest = statusCheckRequest(item.type, true, item.id)
+                    viewModel.statusCheck( statusCheckRequest )
+                    radioGroup.visibility = View.GONE
+                    Toast.makeText(this@UserChatActivity, "좋아요!", Toast.LENGTH_SHORT).show()
+
+                }
+
+                // status "아니요" 누르기
+
+                negativeButton.setOnClickListener {
+                    val statusCheckRequest = statusCheckRequest(item.type, false, item.id)
+                    viewModel.statusCheck( statusCheckRequest )
+                    radioGroup.visibility = View.GONE
+                    Toast.makeText(this@UserChatActivity, "뭔가 문제가 있으신가요?", Toast.LENGTH_SHORT).show()
+
+                }
+
+                my_message_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+                partner_message_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
                 if(position==0 || (position > 0 && !item.createdAt?.substring(0, 10).toString().equals(datas[position-1]?.createdAt?.substring(0, 10).toString()))){
                     chat_date.visibility = View.VISIBLE
@@ -237,6 +290,20 @@ class UserChatActivity : AppCompatActivity() {
                     my_message_text.text = item.content
                 }
                 else{
+                    if (position == datas.size -1 && (
+                        item.type.equals("meal1")||
+                        item.type.equals("meal2")||
+                        item.type.equals("meal3")||
+                        item.type.equals("health")||
+                        item.type.equals("physicalActivity")||
+                        item.type.equals("feel")||
+                        item.type.equals("toilet")
+
+                                )){
+                        radioGroup.visibility = View.VISIBLE
+                    }
+                    else
+                        radioGroup.visibility = View.GONE
                     my_message.visibility = View.GONE
                     partner_message.visibility = View.VISIBLE
                     loading_bar.visibility = View.GONE
@@ -245,9 +312,12 @@ class UserChatActivity : AppCompatActivity() {
                         partner_message_text.visibility = View.GONE
                         loading_bar.visibility = View.VISIBLE
                     }
-                    else
+                    else{
                         partner_message_text.visibility = View.VISIBLE
+                    }
                 }
+
+
 
 
 
@@ -317,7 +387,6 @@ class UserChatActivity : AppCompatActivity() {
         }
 
         override fun onResults(results: Bundle) {
-            Toast.makeText(this@UserChatActivity, results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)!![0], Toast.LENGTH_SHORT).show()
             binding.chatContent.setText(results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)!![0])
         }
     }

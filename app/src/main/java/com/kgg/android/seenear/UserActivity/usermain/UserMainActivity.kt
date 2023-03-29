@@ -12,6 +12,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kgg.android.seenear.App
+import com.kgg.android.seenear.AuthActivity.IntroActivity
 import com.kgg.android.seenear.R
 import com.kgg.android.seenear.UserActivity.userchat.UserChatActivity
 import com.kgg.android.seenear.UserActivity.usermodify.ModifyUserInfoActivity
@@ -91,6 +92,19 @@ class UserMainActivity : AppCompatActivity() {
             val intent = Intent(this, UserChatActivity::class.java)
             intent.putExtra("name", userInfo.name)
             intent.putExtra("elderlyId", userInfo.id)
+            startActivity(intent)
+        }
+
+        // 로그아웃
+
+        binding.logoutBtn.setOnClickListener {
+            App.prefs.accessToken = null
+            App.prefs.refreshToken = null
+            App.prefs.role = null
+            App.prefs.id = null
+            val intent = Intent(this, IntroActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
             startActivity(intent)
         }
 

@@ -6,6 +6,7 @@ data class chat(
     var content : String? = null,
     var createdAt : String? = null,
     var userSend : Boolean = true,
+    var type : String? = null
 )
 
 data class chatResponse(

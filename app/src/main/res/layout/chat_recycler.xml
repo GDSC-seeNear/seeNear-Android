@@ -8,7 +8,6 @@
         android:id="@+id/chat_date"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,9 +41,10 @@
         android:id="@+id/partner_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chat_date">
@@ -80,7 +80,6 @@
             android:gravity="bottom"
             android:orientation="horizontal"
             android:paddingTop="6dp"
-            android:paddingEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -88,27 +87,63 @@
                 android:id="@+id/loading_bar"
                 android:layout_width="100dp"
                 android:layout_height="48dp"
+                android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="loading2.json"
                 app:lottie_loop="true" />
 
-            <TextView
-                android:id="@+id/partner_message_text"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="1dp"
                 android:background="@drawable/chatting_partner"
-                android:gravity="center|start"
-                android:lineSpacingExtra="2dp"
-                android:paddingStart="12dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="8dp"
-                android:text="상대 메시지"
-                android:textSize="12dp"
-                android:visibility="gone" />
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/partner_message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:gravity="center|start"
+                    android:lineSpacingExtra="2dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+                    android:text="아침식사는 하셨나요?"
+                    android:textSize="12dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#6AFFFFFF"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <RadioButton
+                        android:id="@+id/positiveButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="네"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/negativeButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="아니요"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+                </RadioGroup>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -118,7 +153,6 @@
         android:id="@+id/my_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,9 +161,11 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:orientation="horizontal"
             android:paddingStart="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

@@ -6,6 +6,7 @@ plugins {
 
 }
 
+
 android {
     configurations {
         implementation.exclude group: 'org.jetbrains', module: 'annotations' }
@@ -109,6 +110,8 @@ dependencies {
     // Lottie (로딩 애니메이션)
     implementation 'com.airbnb.android:lottie:3.7.0'
 
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 
 task copyCustomOps(type: Copy) {

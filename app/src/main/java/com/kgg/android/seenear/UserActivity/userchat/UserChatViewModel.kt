@@ -10,10 +10,7 @@ import com.kgg.android.seenear.App
 import com.kgg.android.seenear.network.ChatInterface
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.RetrofitRepository
-import com.kgg.android.seenear.network.data.chat
-import com.kgg.android.seenear.network.data.chatRequest
-import com.kgg.android.seenear.network.data.chatResponse
-import com.kgg.android.seenear.network.data.registerResponse
+import com.kgg.android.seenear.network.data.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,11 +24,8 @@ class UserChatViewModel(private val repository : RetrofitRepository) : ViewModel
     val chatMessages: LiveData<List<chat>> = chatList
 
     fun addChatMessage(chatMessage: String) {
-        val chatMessages = chatList.value.orEmpty().dropLast(1) + chat(0, App.prefs.id!!, chatMessage, Timestamp(System.currentTimeMillis()).toString(), false)
-//        chatList.value?.dropLast(0) // 마지막 값을 지우는 코드
-//        chatList.value = chatList.value.orEmpty().filter { !it.content.equals("loading...") }
+        val chatMessages = chatList.value?.filter { it.content != "loading..." }.orEmpty() + chat(0, App.prefs.id!!, chatMessage, Timestamp(System.currentTimeMillis()).toString(), false, )
         chatList.postValue(chatMessages)
-
     }
 
 //    fun sendChat(contents : chatRequest){
@@ -69,20 +63,20 @@ class UserChatViewModel(private val repository : RetrofitRepository) : ViewModel
     }
 
     fun sendChatMessage(contents: chatRequest) {
-        val chatMessages = chatList.value.orEmpty() + chat(0, contents.elderly_id, contents.content, Timestamp(System.currentTimeMillis()).toString(), contents.is_user_send)
+        val chatMessages = chatList.value.orEmpty() + chat(0, contents.elderlyId, contents.content, Timestamp(System.currentTimeMillis()).toString(), contents.userSend)
         chatList.postValue(chatMessages)
 
         Handler().postDelayed({
             // 3초 후에 실행될 코드 작성
-            val chatMessages2 = chatList.value.orEmpty() + chat(0, contents.elderly_id, "loading...", Timestamp(System.currentTimeMillis()).toString(), false)
+            val chatMessages2 = chatList.value.orEmpty() + chat(0, contents.elderlyId, "loading...", Timestamp(System.currentTimeMillis()).toString(), false)
             chatList.postValue(chatMessages2)
         }, 1000)
 
 
         val json = JSONObject()
-        json.put("elderlyId", contents.elderly_id)
+        json.put("elderlyId", contents.elderlyId)
         json.put("content", contents.content)
-        json.put("userSend", contents.is_user_send)
+        json.put("userSend", contents.elderlyId)
         val message = json.toString()
 
         webSocketClient?.send(message)
@@ -105,7 +99,6 @@ class UserChatViewModel(private val repository : RetrofitRepository) : ViewModel
                         Log.d("request Id in success :", response.code().toString())
                         Log.d("requestBody!!!", it.toString())
                         chatList.value = it.chatList
-
                     }
                 } else { // code == 401
                     // 실패 처리
@@ -122,5 +115,33 @@ class UserChatViewModel(private val repository : RetrofitRepository) : ViewModel
         })
     }
 
+
+    fun statusCheck(statusCheckRequest: statusCheckRequest) {
+
+        val header = "Bearer " + App.prefs.accessToken
+        val callApi = RetrofitInterface.createForImport().statusCheck( statusCheckRequest, statusCheckRequest.type!!, statusCheckRequest.chatId)
+        callApi.enqueue(object : Callback<statusCheckResponse> {
+            override fun onResponse(call: Call<statusCheckResponse>, response: Response<statusCheckResponse>) {
+                if (response.isSuccessful()) { // <--> response.code == 200
+                    // 성공 처리
+
+                    response.body()?.let {
+                        Log.d("request Id in success :", response.code().toString())
+                        Log.d("requestBody!!!", it.toString())
+                    }
+                } else { // code == 401
+                    // 실패 처리
+                    response.body()?.let {
+                        Log.d("request Id in not :", response.code().toString())
+
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<statusCheckResponse>, t: Throwable) {
+                Log.d("request Id in failure :", "here " + t.message.toString())
+            }
+        })
+    }
 
 }

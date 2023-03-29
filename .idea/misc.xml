@@ -32,15 +32,16 @@
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/activity_admin_detail.xml" value="0.3368413289388019" />
         <entry key="app/src/main/res/layout/activity_admin_login.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/activity_admin_main.xml" value="0.23510971786833856" />
+        <entry key="app/src/main/res/layout/activity_admin_main.xml" value="0.20373917343474474" />
         <entry key="app/src/main/res/layout/activity_admin_main2.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_admin_report.xml" value="0.35585325564480164" />
         <entry key="app/src/main/res/layout/activity_admin_signin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_admin_signin2.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/activity_admin_signup.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_admin_signup2.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.3402389526367187" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25998433430989576" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21224873860677076" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/activity_map_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_medicine_inquiry.xml" value="0.42419873949890685" />
@@ -54,17 +55,18 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_stt.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_admin.xml" value="0.39158325195312504" />
-        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.3444674107226098" />
+        <entry key="app/src/main/res/layout/activity_user_chat.xml" value="0.33085504499995344" />
         <entry key="app/src/main/res/layout/activity_user_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_user_signup.xml" value="0.1870438148235452" />
         <entry key="app/src/main/res/layout/activity_user_signup2.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/bottom_navigation.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.3282051282051282" />
-        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.47344418789478077" />
+        <entry key="app/src/main/res/layout/chat_recycler.xml" value="0.3302482475668697" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.3282051282051282" />
         <entry key="app/src/main/res/layout/item_recycler.xml" value="0.21367521367521367" />
         <entry key="app/src/main/res/layout/medicine_recycler.xml" value="0.2831124332149323" />
+        <entry key="app/src/main/res/layout/report_recycler.xml" value="0.3282051282051282" />
         <entry key="app/src/main/res/layout/todo_recycler.xml" value="0.38590956887486855" />
         <entry key="app/src/main/res/layout/viewholder_search_result_item.xml" value="0.3271794871794872" />
         <entry key="app/src/main/res/menu/navi_menu.xml" value="0.3271794871794872" />

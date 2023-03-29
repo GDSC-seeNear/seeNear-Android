@@ -164,5 +164,28 @@ interface RetrofitInterface {
         @Path("elderlyId") elderlyId: Int,
     ): Call<chatResponse> // body X
 
+    // 특정 유저의 특정 날짜의 레포트 가져오기
+    @GET("/report/{elderlyId}")
+    suspend fun getUserReportByDate(
+        @Header("Authorization") authorizationHeader: String,
+        @Path("elderlyId") elderlyId: Int,
+        @Query("date") date: String
+    ): Call<Report>
+
+    // 특정 유저의 전체 날짜의 레포트 가져오기
+    @GET("/report/{elderlyId}")
+    suspend fun getUserReports(
+        @Header("Authorization") authorizationHeader: String,
+        @Path("elderlyId") elderlyId: Int
+    ): Call<reportList>
+
+    // 특정 유저의 전체 날짜의 레포트 가져오기
+    @PATCH("/statusCheck/update/{statusType}/{chatId}")
+    fun statusCheck(
+//        @Header("Authorization") authorizationHeader: String,
+        @Body statusCheckRequest : statusCheckRequest,
+        @Path("statusType") statusType: String,
+        @Path("chatId") chatId: Int,
+    ): Call<statusCheckResponse>
 
 }

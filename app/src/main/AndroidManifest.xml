@@ -88,6 +88,10 @@
             android:name=".UserActivity.usermain.UserMainActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".AdminActivity.adminReportActivity.AdminReportActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />

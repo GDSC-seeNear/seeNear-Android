@@ -21,8 +21,9 @@ open class WebSocketListener(private val viewModel: UserChatViewModel) : WebSock
         // WebSocket에서 새로운 메시지를 받았을 때 호출
 
         Log.d("Socket","Receiving : $text")
-
-        viewModel.addChatMessage(text.drop(1).dropLast(1)) // 앞 뒤 따옴표 삭제
+        val jsonObject = JSONObject(text)
+        val content = jsonObject.getString("content")
+        viewModel.addChatMessage(content) // 앞 뒤 따옴표 삭제
     }
 
     override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
