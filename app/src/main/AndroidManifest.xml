@@ -61,9 +61,6 @@
             android:name=".SplashActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminActivity.MapSearchActivity.MapActivity"
-            android:exported="true" />
-        <activity
             android:name=".AuthActivity.LoginActivity"
             android:exported="true" />
         <activity

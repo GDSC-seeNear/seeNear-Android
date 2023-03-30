@@ -115,12 +115,10 @@ class SignupActivity2 : AppCompatActivity(){
                 }
                 else {
 
-
-
                     var stringToJson = JSONObject(response.errorBody()?.string()!!)
-                    Log.e("signup?", "stringToJson: ${stringToJson.getString("message")}")
+                    Log.e("signup?", "error: ${stringToJson.getString("error")}")
 
-                    Toast.makeText(this@SignupActivity2, stringToJson.getString("message"), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignupActivity2, stringToJson.getString("error"), Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@SignupActivity2, IntroActivity::class.java)
                     startActivity(intent)
                 }

@@ -71,49 +71,19 @@ class AdminDetailActivity : AppCompatActivity() {
 
         // 유저 레포트 가져오기
 
-        datas.add(Report(
-            date= "2023-01-02",
 
-            sentiment = arrayListOf<Sentiment>(
-                Sentiment("기쁨", 3),
-                Sentiment("우울", 5),
-                Sentiment("불안", 2)
-
-            ),
-
-            ner = arrayListOf<Ner>(
-                Ner(
-                    id=  3,
-                    type ="PS_NAME",
-                    target= "아들" ,
-                    chatId = 3,
-                    elderlyId =7 )
-            ),
-
-            statusCheck = arrayListOf<StatusCheck>(
-                StatusCheck("meal1", true),
-                StatusCheck("meal2", true),
-                StatusCheck("meal3", false),
-                StatusCheck("health", false),
-                StatusCheck("physicalActivity", false),
-                StatusCheck("feel", false),
-                StatusCheck("toilet", false),
-
-
-                )
-        ))
 
         initRecycler()
 
-//        viewModel.userList.observe(this, Observer {
-//            Log.d("userInfo",it.toString())
-//            userList = it
-//            datas.addAll(userList)
-//            Log.d("datas", datas.toString())
-//            initRecycler()
-//        })
-//
-//        App.prefs.accessToken?.let { viewModel.getUserReports(it, elderly_id) }
+        viewModel.userList.observe(this, Observer {
+            Log.d("userInfo",it.toString())
+            userList = it
+            datas.addAll(userList)
+            Log.d("datas", datas.toString())
+            initRecycler()
+        })
+
+        App.prefs.accessToken?.let { viewModel.getUserReports(it, elderly_id) }
 
 
         // 유저 개인정보 수정
@@ -184,8 +154,7 @@ class AdminDetailActivity : AppCompatActivity() {
 
                 itemView.setOnClickListener {
                     val intent = Intent(this@AdminDetailActivity, AdminReportActivity::class.java)
-                    intent.putExtra("elderlyId", elderly_id)
-                    intent.putExtra("date", item.date)
+                    intent.putExtra("report", item)
                     startActivity(intent)
                 }
 

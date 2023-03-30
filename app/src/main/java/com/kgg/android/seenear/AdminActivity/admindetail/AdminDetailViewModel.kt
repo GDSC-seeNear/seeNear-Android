@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.kgg.android.seenear.AdminActivity.MapSearchActivity.utility.RetrofitUtil.apiService
 import com.kgg.android.seenear.App
 import com.kgg.android.seenear.network.RetrofitInterface
 import com.kgg.android.seenear.network.RetrofitRepository
@@ -61,28 +63,30 @@ class AdminDetailViewModel (private val repository : RetrofitRepository) : ViewM
             val AuthorizationHeader = "Bearer " + accessToken
 
             val callApi = RetrofitInterface.createForImport().getUserReports( authorizationHeader = AuthorizationHeader, elderlyId )
-            callApi.enqueue(object : Callback<reportList> {
-                override fun onResponse(call: Call<reportList>, response: Response<reportList>) {
-                    if (response.isSuccessful()) { // <--> response.code == 200
-                        // 성공 처리
-                        response.body()?.let {
-                            Log.d("request Id in success :", response.code().toString())
-                            Log.d("request Id in success :", it?.toString())
-                            userList.value = it.reportList
-                        }
-
-                    } else { // code == 401
-                        // 실패 처리
-                        response.body()?.let {
-                            Log.d("request Id in not :", response.code().toString())
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<reportList>, t: Throwable) {
-                    Log.d("request Id in failure :", t.message.toString())
-                }
-            })
+            Log.d("callAPi", callApi.toString())
+            userList.value = callApi.reportList
+//            callApi.enqueue(object : Callback<ReportResponse> {
+//                override fun onResponse(call: Call<ReportResponse>, response: Response<ReportResponse>) {
+//                    if (response.isSuccessful()) { // <--> response.code == 200
+//                        // 성공 처리
+//                        response.body()?.let {
+//                            Log.d("request Id in success :", response.code().toString())
+//                            Log.d("request Id in success :", it?.toString())
+//                            userList.value = it.reportList
+//                        }
+//
+//                    } else { // code == 401
+//                        // 실패 처리
+//                        response.body()?.let {
+//                            Log.d("request Id in not :", response.code().toString())
+//                        }
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ReportResponse>, t: Throwable) {
+//                    Log.d("request Id in failure :", t.message.toString())
+//                }
+//            })
 
 
         }

@@ -177,7 +177,7 @@ interface RetrofitInterface {
     suspend fun getUserReports(
         @Header("Authorization") authorizationHeader: String,
         @Path("elderlyId") elderlyId: Int
-    ): Call<reportList>
+    ): reportList
 
     // 특정 유저의 전체 날짜의 레포트 가져오기
     @PATCH("/statusCheck/update/{statusType}/{chatId}")
