@@ -3,6 +3,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetDashBoard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,8 +22,7 @@
         android:background="@drawable/round_edittext_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView37"
@@ -37,34 +37,20 @@
         app:layout_constraintStart_toStartOf="@+id/userCheckBtn"
         app:layout_constraintTop_toTopOf="@+id/userCheckBtn" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout8"
-        android:layout_width="0dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="32dp"
+    <TextView
+        android:id="@+id/userInfo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36">
-
-        <TextView
-            android:id="@+id/userInfo_text"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#00FFFFFF"
-            android:inputType="textMultiLine"
-            android:lineSpacingExtra="8sp"
-            android:maxLength="100"
-            android:padding="8dp"
-            android:singleLine="false"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="#00FFFFFF"
+        android:inputType="textMultiLine"
+        android:lineSpacingExtra="8sp"
+        android:maxLength="100"
+        android:padding="8dp"
+        android:singleLine="false"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
     <TextView
         android:id="@+id/textView36"

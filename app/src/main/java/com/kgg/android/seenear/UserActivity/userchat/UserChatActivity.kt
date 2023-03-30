@@ -294,6 +294,9 @@ class UserChatActivity : AppCompatActivity() {
                         item.type.equals("meal1")||
                         item.type.equals("meal2")||
                         item.type.equals("meal3")||
+                                item.type.equals("medicine1")||
+                                item.type.equals("medicine2")||
+                                item.type.equals("medicine3")||
                         item.type.equals("health")||
                         item.type.equals("physicalActivity")||
                         item.type.equals("feel")||
