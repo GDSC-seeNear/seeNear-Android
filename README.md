@@ -53,3 +53,6 @@ The administrator receives the user's answers in the form of a report with stati
         <a href="https://github.com/keonju2"><img src="https://avatars.githubusercontent.com/u/54880474?v=4" width="150px" alt="나건주"/><br /><sub><b>나건주</b></sub></a>
   <tr>
 </table> 
+
+####download
+(https://github.com/GDSC-seeNear/FE/releases/tag/v1.0.0)
