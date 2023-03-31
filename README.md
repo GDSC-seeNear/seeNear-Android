@@ -54,5 +54,5 @@ The administrator receives the user's answers in the form of a report with stati
   <tr>
 </table> 
 
-####download
+### download
 (https://github.com/GDSC-seeNear/FE/releases/tag/v1.0.0)
