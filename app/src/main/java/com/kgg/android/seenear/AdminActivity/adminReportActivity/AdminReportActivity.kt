@@ -29,6 +29,10 @@ class AdminReportActivity : AppCompatActivity(){
         binding = ActivityAdminReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
         report = intent.getParcelableExtra<Report>("report")!!
+        val name = intent.getStringExtra("name")
+        binding.nameText.text = name + " 님의"
+
+
         Log.d("report!!!", report.toString())
 
         val repository = RetrofitRepository()

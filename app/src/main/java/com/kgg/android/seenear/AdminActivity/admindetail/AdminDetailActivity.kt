@@ -25,6 +25,8 @@ import com.kgg.android.seenear.AdminActivity.adminmain.AdminMainActivity
 import com.kgg.android.seenear.UserActivity.usermodify.ModifyUserInfoActivity
 import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.MedicineInquiryActivity
 import com.kgg.android.seenear.network.data.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AdminDetailActivity : AppCompatActivity() {
@@ -56,10 +58,25 @@ class AdminDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(AdminDetailViewModel::class.java)
 
 
+
         viewModel.userInfo.observe(this, Observer {
             Log.d("userInfo",it.toString())
+
             binding.profileNameDetail.text = it.name
-            binding.profileBirthDetail.text = it.birth
+
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date = sdf.parse(it.birth)
+
+            val dob = Calendar.getInstance()
+            dob.time = date
+
+            val today = Calendar.getInstance()
+            var age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
+            if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                age--
+            }
+
+            binding.profileBirthDetail.text = "만 "+ age.toString() +"세"
             binding.profileAddressDetail.text = it.addressDetail
             elderly_id = it.id!!
             name = it.name!!
@@ -155,6 +172,7 @@ class AdminDetailActivity : AppCompatActivity() {
                 itemView.setOnClickListener {
                     val intent = Intent(this@AdminDetailActivity, AdminReportActivity::class.java)
                     intent.putExtra("report", item)
+                    intent.putExtra("name",binding.profileNameDetail.text )
                     startActivity(intent)
                 }
 

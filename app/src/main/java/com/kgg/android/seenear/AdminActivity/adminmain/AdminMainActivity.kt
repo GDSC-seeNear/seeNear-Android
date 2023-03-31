@@ -32,6 +32,8 @@ import com.kgg.android.seenear.data.userInfo
 import com.kgg.android.seenear.databinding.ActivityAdminMainBinding
 import com.kgg.android.seenear.network.RetrofitRepository
 import com.kgg.android.seenear.network.data.registerResponse
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AdminMainActivity : AppCompatActivity() {
 
@@ -160,7 +162,21 @@ class AdminMainActivity : AppCompatActivity() {
 
             fun bind(item: registerResponse) {
                 profile_name.text = item.name
-                profile_birth.text = item.birth
+
+
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = sdf.parse(item.birth)
+
+                val dob = Calendar.getInstance()
+                dob.time = date
+
+                val today = Calendar.getInstance()
+                var age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
+                if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+                    age--
+                }
+                profile_birth.text = "만 "+ age.toString() +"세"
+
                 profile_address.text = item.addressDetail
 
                 itemView.setOnClickListener {

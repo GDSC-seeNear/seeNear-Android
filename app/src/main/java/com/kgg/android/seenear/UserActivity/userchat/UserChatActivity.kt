@@ -70,12 +70,13 @@ class UserChatActivity : AppCompatActivity() {
     lateinit var userList: List<registerResponse>
 
     private lateinit var speechRecognizer: SpeechRecognizer
+    lateinit var idList : List<Int>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val time = System.currentTimeMillis()
         val dateFormat = SimpleDateFormat(("yyyy년 MM월 dd일 E요일"), Locale("ko", "KR"))
         val timeFormat = SimpleDateFormat(("HH:mm"), Locale("ko", "KR"))
@@ -85,6 +86,7 @@ class UserChatActivity : AppCompatActivity() {
         val repository = RetrofitRepository()
         val viewModelFactory = UserChatViewModelFactory(repository)
 
+        bool = true
         viewModel = ViewModelProvider(this,viewModelFactory).get(UserChatViewModel::class.java)
 
 
@@ -104,7 +106,6 @@ class UserChatActivity : AppCompatActivity() {
             initRecycler()
             if (it.size>0)
                 binding.recyclerView.scrollToPosition(datas.size - 1) // 가장 마지막 항목으로 스크롤
-            binding.recyclerView.smoothScrollToPosition(datas.size - 1)
 
         })
 
@@ -124,9 +125,11 @@ class UserChatActivity : AppCompatActivity() {
             // 권한 체크 코드
             if (Build.VERSION.SDK_INT >= 23)
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO), 1)
-            chatAdapter.notifyDataSetChanged()
 
             startSTT()
+
+
+
         }
         binding.chatSendBtn.setOnClickListener {
             if (binding.chatContent.text.length>0){
@@ -216,6 +219,7 @@ class UserChatActivity : AppCompatActivity() {
 
     companion object{
         var textSize = 14f
+        var bool = true
     }
 
 
@@ -245,12 +249,11 @@ class UserChatActivity : AppCompatActivity() {
             private val loading_bar: LottieAnimationView = itemView.findViewById(R.id.loading_bar)
             private val chat_date: ConstraintLayout = itemView.findViewById(R.id.chat_date)
             private val chat_date_text: TextView = itemView.findViewById(R.id.chat_date_text)
-             private val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup)
+            private val radioGroup: RadioGroup = itemView.findViewById(R.id.radioGroup)
             private val positiveButton: RadioButton = itemView.findViewById(R.id.positiveButton)
             private val negativeButton: RadioButton = itemView.findViewById(R.id.negativeButton)
 
             fun bind(item: chat) {
-
 
                 // status "네" 누르기
 
@@ -258,7 +261,12 @@ class UserChatActivity : AppCompatActivity() {
                     val statusCheckRequest = statusCheckRequest(item.type, true, item.id)
                     viewModel.statusCheck( statusCheckRequest )
                     radioGroup.visibility = View.GONE
+                    bool = false
                     Toast.makeText(this@UserChatActivity, "좋아요!", Toast.LENGTH_SHORT).show()
+//                    val currentRead = Read(item.id)
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        db.readDao().insertRead(currentRead)
+//                    }
 
                 }
 
@@ -268,8 +276,12 @@ class UserChatActivity : AppCompatActivity() {
                     val statusCheckRequest = statusCheckRequest(item.type, false, item.id)
                     viewModel.statusCheck( statusCheckRequest )
                     radioGroup.visibility = View.GONE
+                    bool = false
                     Toast.makeText(this@UserChatActivity, "뭔가 문제가 있으신가요?", Toast.LENGTH_SHORT).show()
-
+//                    val currentRead = Read(item.id)
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        db.readDao().insertRead(currentRead)
+//                    }
                 }
 
                 my_message_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
@@ -284,6 +296,8 @@ class UserChatActivity : AppCompatActivity() {
                 }
 
                 Log.d("datas in bind", item.toString())
+
+
                 if (item.userSend== true){
                     partner_message.visibility = View.GONE
                     my_message.visibility = View.VISIBLE
@@ -291,18 +305,19 @@ class UserChatActivity : AppCompatActivity() {
                 }
                 else{
                     if (position == datas.size -1 && (
-                        item.type.equals("meal1")||
-                        item.type.equals("meal2")||
-                        item.type.equals("meal3")||
-                                item.type.equals("medicine1")||
-                                item.type.equals("medicine2")||
-                                item.type.equals("medicine3")||
-                        item.type.equals("health")||
-                        item.type.equals("physicalActivity")||
-                        item.type.equals("feel")||
-                        item.type.equals("toilet")
+                                item.type.equals("meal1")||
+                                        item.type.equals("meal2")||
+                                        item.type.equals("meal3")||
+                                        item.type.equals("medicine1")||
+                                        item.type.equals("medicine2")||
+                                        item.type.equals("medicine3")||
+                                        item.type.equals("health")||
+                                        item.type.equals("physicalActivity")||
+                                        item.type.equals("feel")||
+                                        item.type.equals("toilet")
 
-                                )){
+                                )
+                        && bool){
                         radioGroup.visibility = View.VISIBLE
                     }
                     else
@@ -344,6 +359,9 @@ class UserChatActivity : AppCompatActivity() {
             startListening(speechRecognizerIntent)
         }
 
+        if (datas.size>0)
+            binding.recyclerView.smoothScrollToPosition(datas.size - 1)
+
     }
     /***
      *  SpeechToText 기능 세팅
@@ -356,6 +374,10 @@ class UserChatActivity : AppCompatActivity() {
             binding.STTButton.visibility = View.GONE
             binding.chatContent.isFocusable = false
             binding.chatContent.isFocusableInTouchMode = false
+
+            initRecycler()
+            if (datas.size>0)
+                binding.recyclerView.smoothScrollToPosition(datas.size - 1)
         }
 
         override fun onRmsChanged(rmsdB: Float) {}
@@ -372,7 +394,8 @@ class UserChatActivity : AppCompatActivity() {
             Toast.makeText(this@UserChatActivity, "음성인식을 종료합니다", Toast.LENGTH_SHORT).show()
             binding.loadingBar.visibility = View.GONE
             binding.STTButton.visibility = View.VISIBLE
-            binding.recyclerView.smoothScrollToPosition(datas.size - 1)
+            if (datas.size>0)
+                binding.recyclerView.smoothScrollToPosition(datas.size - 1)
             binding.chatContent.isFocusable = true
             binding.chatContent.isFocusableInTouchMode = true
 

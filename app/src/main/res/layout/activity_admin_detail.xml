@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="챗봇 정보 수정"
+                android:text="약 복용 정보"
                 android:textStyle="bold" />
         </LinearLayout>
 

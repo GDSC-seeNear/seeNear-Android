@@ -41,7 +41,8 @@
         android:id="@+id/userInfo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:background="#00FFFFFF"
         android:inputType="textMultiLine"
         android:lineSpacingExtra="8sp"
@@ -49,6 +50,7 @@
         android:padding="8dp"
         android:singleLine="false"
         android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/userCheckBtn"
         app:layout_constraintStart_toStartOf="@+id/textView36"
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
 

@@ -122,12 +122,6 @@ class RegisterActivity2 : AppCompatActivity() {
                 return;
             }
 
-            Toast.makeText(
-                this,
-                "주소 : ${data?.getStringExtra("address").toString()}",
-                Toast.LENGTH_SHORT
-            )
-                .show()
             userInfo.addressLati = data?.getDoubleExtra("latitude", 0.0)
             userInfo.addressLongi = data?.getDoubleExtra("longitude", 0.0)
             binding.homeEdittext.text = data?.getStringExtra("address").toString()
@@ -180,6 +174,8 @@ class RegisterActivity2 : AppCompatActivity() {
         val AuthorizationHeader = "Bearer " + App.prefs.accessToken
         Log.d("AuthorizationHeader :", AuthorizationHeader.toString())
         Log.d("userInfo :", userInfo.toString())
+        userInfo.isConnect = true
+
         val callApi = smsAuthApi.register(authorizationHeader = AuthorizationHeader, checkRegisterRequest =  userInfo)
         callApi.enqueue(object : Callback<registerResponse> {
             override fun onResponse(call: Call<registerResponse>, response: Response<registerResponse>) {
