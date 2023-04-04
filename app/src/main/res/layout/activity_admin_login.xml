@@ -13,15 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
-
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_icon_arrow_left" />
-
-    </androidx.appcompat.widget.Toolbar>
+        android:theme="?attr/actionBarTheme"/>
 
 
 
