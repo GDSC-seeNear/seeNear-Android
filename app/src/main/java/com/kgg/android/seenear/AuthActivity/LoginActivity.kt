@@ -45,6 +45,8 @@ class LoginActivity : AppCompatActivity() {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
+
             }
             else { // 인증번호 전송 실패
                 Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
@@ -53,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
         binding.sendText.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
@@ -83,8 +86,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(this@LoginActivity, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
-
 
                 } else { // code == 401
                     // 실패 처리

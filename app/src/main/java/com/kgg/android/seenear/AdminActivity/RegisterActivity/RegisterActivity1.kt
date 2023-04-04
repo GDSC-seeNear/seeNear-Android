@@ -57,8 +57,6 @@ class RegisterActivity1 : AppCompatActivity() {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful()) { // <--> response.code == 200
                         // 성공 처리
-                        Toast.makeText(this@RegisterActivity1, "인증번호를 전송하였습니다.", Toast.LENGTH_SHORT).show()
-
                     } else { // code == 401
                         // 실패 처리
                         response.body()?.let{
@@ -117,21 +115,21 @@ class RegisterActivity1 : AppCompatActivity() {
         binding.sendText.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 SignupActivity.phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ SignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number correctly.", Toast.LENGTH_SHORT).show()
             }
         }
         binding.sendBtn.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 SignupActivity.phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ SignupActivity.phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number correctly.", Toast.LENGTH_SHORT).show()
             }
         }
 

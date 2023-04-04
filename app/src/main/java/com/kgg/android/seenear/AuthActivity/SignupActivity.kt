@@ -58,6 +58,7 @@ class SignupActivity : AppCompatActivity() {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
             }
             else { // 인증번호 전송 실패
                 Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
@@ -67,6 +68,7 @@ class SignupActivity : AppCompatActivity() {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
+                Toast.makeText(this, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
             }
             else { // 인증번호 전송 실패
                 Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
