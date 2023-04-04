@@ -22,6 +22,28 @@ The administrator receives the user's answers in the form of a report with stati
 [![SeeNear](https://user-images.githubusercontent.com/54880474/229173623-2b5241ae-dc6c-488f-8b63-a9108537ed76.jpg)](https://youtu.be/JpiwWp_myq8)  
 </br>
 
+## Screen
+
+#### User
+</br>
+<table algin="center">
+   <tr>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229884791-e98b11d3-5c50-4689-adac-6dbf6465ea4e.png" width="250px"/></td>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229884896-8c18901c-87df-4c8c-a898-2040416b147f.png" width="250px"/></td>
+  </table> 
+  </br>
+  
+#### Caregiver
+</br>
+<table algin="center">
+   <tr>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229883021-ceaebd72-4f9f-49aa-b0dd-d0ca4e9562f0.png" width="250px"/></td>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229884158-ad5cd93a-f248-4865-be30-d0e9c4cb4846.png" width="250px"/></td>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229884235-4f55f7b6-0a30-4978-a30b-c9f7da3fd9e4.png" width="250px"/></td>
+      <td colspan="1" align="center"><img src="https://user-images.githubusercontent.com/74501631/229884329-7453c913-1f22-4dc0-8445-8df9cad05436.png" width="250px"/></td>
+   </tr>
+  </table> 
+
 ## Repository
 [Android](https://github.com/GDSC-seeNear/FE) - Kotlin  
 [BackEnd](https://github.com/GDSC-seeNear/BE) - Java, Spring Boot    
