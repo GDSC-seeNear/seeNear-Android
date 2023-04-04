@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:gravity="center|right"
             android:padding="24dp"
-            android:text="삭제"
+            android:text="delete"
             android:textColor="@color/theme_orange"
             android:textSize="14dp"
             android:textStyle="bold" />

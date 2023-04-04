@@ -56,7 +56,7 @@ class AdminMainActivity : AppCompatActivity() {
         viewModel.myName.observe(this, Observer {
             if (it!=null){
                 Log.d("myName",it.toString())
-                binding.myNameText.text = it + " 님의"
+                binding.myNameText.text = it
                 dialog.dismiss()
             }
             else{
@@ -175,7 +175,7 @@ class AdminMainActivity : AppCompatActivity() {
                 if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
                     age--
                 }
-                profile_birth.text = "만 "+ age.toString() +"세"
+                profile_birth.text = "Age " + age.toString()
 
                 profile_address.text = item.addressDetail
 

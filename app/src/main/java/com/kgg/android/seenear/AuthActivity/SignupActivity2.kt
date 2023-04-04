@@ -36,10 +36,10 @@ class SignupActivity2 : AppCompatActivity(){
         phoneNum = intent.getStringExtra("phoneNum")
 
         if (role.equals("user")){
-            binding.phoneText4.text = "사용자 회원가입"
+            binding.phoneText4.text = "User Sign Up"
         }
         else {
-            binding.phoneText4.text = "보호자 회원가입"
+            binding.phoneText4.text = "Caregiver Sign Up"
         }
 
         binding.registerBtn.setOnClickListener {
@@ -47,7 +47,7 @@ class SignupActivity2 : AppCompatActivity(){
                 signUp(binding.nameEdittext.text.toString(), phoneNum!!)
             }
             else
-                Toast.makeText(this, "이름을 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your name accurately.", Toast.LENGTH_SHORT).show()
         }
 
         binding.registText.setOnClickListener {
@@ -55,7 +55,7 @@ class SignupActivity2 : AppCompatActivity(){
                 signUp(binding.nameEdittext.text.toString(), phoneNum!!)
             }
             else
-                Toast.makeText(this, "이름을 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your name accurately.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -79,7 +79,7 @@ class SignupActivity2 : AppCompatActivity(){
             override fun onResponse(call: Call<signupResponse>, response: Response<signupResponse>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
 
-                    Toast.makeText(this@SignupActivity2, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignupActivity2, "You have successfully signed up.", Toast.LENGTH_SHORT).show()
 
                     response.body()?.let{
                         Log.d("signup?", "accesstoken: " + it.accessToken.toString())
@@ -150,7 +150,7 @@ class SignupActivity2 : AppCompatActivity(){
             override fun onResponse(call: Call<loginResponse>, response: Response<loginResponse>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(applicationContext, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "You have been logged in.", Toast.LENGTH_SHORT).show()
                     response.body()?.let{
                         App.prefs.accessToken= it.accessToken
                         App.prefs.refreshToken= it.refreshToken
@@ -165,7 +165,7 @@ class SignupActivity2 : AppCompatActivity(){
 
                 } else { // code == 401
                     // 실패 처리
-                    Toast.makeText(applicationContext, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Login failed.", Toast.LENGTH_SHORT).show()
                     Log.d("accessToken :", response.code().toString())
 
                 }

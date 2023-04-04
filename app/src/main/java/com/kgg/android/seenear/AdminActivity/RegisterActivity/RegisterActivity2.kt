@@ -37,7 +37,7 @@ class RegisterActivity2 : AppCompatActivity() {
     val REQUEST_CODE = 100
 
     companion object{
-        var fullAddress : String = "주소를 선택해주세요"
+        var fullAddress : String = "Select the address"
     }
     private val smsAuthApi by lazy {
         RetrofitInterface.createForImport()
@@ -181,7 +181,7 @@ class RegisterActivity2 : AppCompatActivity() {
             override fun onResponse(call: Call<registerResponse>, response: Response<registerResponse>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(this@RegisterActivity2, "대상자 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity2, "Registration of the target person has been completed.", Toast.LENGTH_SHORT).show()
                     response.body()?.let{
                         Log.d("request Id :", it.toString())
                     }

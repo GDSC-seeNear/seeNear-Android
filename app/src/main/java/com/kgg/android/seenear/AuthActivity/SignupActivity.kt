@@ -40,12 +40,12 @@ class SignupActivity : AppCompatActivity() {
         role = intent.getStringExtra("role").toString() // "user" or "admin"
 
         if (role.equals("user")){
-            binding.phoneText2.text = "사용자 회원가입"
-            binding.loginText2.text = "사용자 로그인"
+            binding.phoneText2.text = "User Sign Up"
+            binding.loginText2.text = "User Log In"
         }
         else {
-            binding.phoneText2.text = "보호자 회원가입"
-            binding.loginText2.text = "보호자 로그인"
+            binding.phoneText2.text = "Caregiver Sign Up"
+            binding.loginText2.text = "Caregiver Log In"
         }
 
         binding.loginText2.setOnClickListener {
@@ -57,21 +57,19 @@ class SignupActivity : AppCompatActivity() {
         binding.sendText.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
             }
         }
         binding.sendBtn.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -104,7 +102,7 @@ class SignupActivity : AppCompatActivity() {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
                     Log.d("request Id :", response.code().toString())
-                    Toast.makeText(this@SignupActivity, "인증번호를 전송하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignupActivity, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
 
                 } else { // code == 401
                     // 실패 처리

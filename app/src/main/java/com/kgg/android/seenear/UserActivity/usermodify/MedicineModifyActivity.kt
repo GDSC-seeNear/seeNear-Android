@@ -104,7 +104,7 @@ class MedicineModifyActivity : AppCompatActivity() {
             override fun onResponse(call: Call<medicine>, response: Response<medicine>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(this@MedicineModifyActivity, "약 복용 정보 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MedicineModifyActivity, "The medication information has been successfully registered.", Toast.LENGTH_SHORT).show()
                     response.body()?.let{
                         Log.d("request Id :", it.toString())
                     }

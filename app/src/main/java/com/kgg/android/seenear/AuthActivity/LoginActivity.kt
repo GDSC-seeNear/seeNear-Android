@@ -44,21 +44,19 @@ class LoginActivity : AppCompatActivity() {
         binding.sendBtn.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
             }
         }
         binding.sendText.setOnClickListener {
             if (binding.phoneEdittext.text.length == 11){ // 인증번호 전송 완료
                 phoneNum = binding.phoneEdittext.text.toString()
-                Toast.makeText(this, "휴대폰 번호: "+ phoneNum, Toast.LENGTH_SHORT).show()
                 sendSMS(phoneNum = binding.phoneEdittext.text.toString())
             }
             else { // 인증번호 전송 실패
-                Toast.makeText(this, "휴대폰 번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter your phone number accurately.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -85,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(this@LoginActivity, "인증번호를 전송하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "The verification code has been sent.", Toast.LENGTH_SHORT).show()
 
 
                 } else { // code == 401
@@ -123,7 +121,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<loginResponse>, response: Response<loginResponse>) {
                 if (response.isSuccessful()) { // <--> response.code == 200
                     // 성공 처리
-                    Toast.makeText(applicationContext, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "You have been logged in.", Toast.LENGTH_SHORT).show()
                     response.body()?.let{
                         App.prefs.accessToken= it.accessToken
                         App.prefs.refreshToken= it.refreshToken
@@ -138,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
 
                 } else { // code == 401
                     // 실패 처리
-                    Toast.makeText(applicationContext, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Login failed.", Toast.LENGTH_SHORT).show()
                     Log.d("accessToken :", response.code().toString())
 
                 }

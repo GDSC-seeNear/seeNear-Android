@@ -1,17 +1,12 @@
 package com.kgg.android.seenear.AuthActivity
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.FirebaseMessaging
 import com.kgg.android.seenear.AdminActivity.adminmain.AdminMainActivity
 import com.kgg.android.seenear.App
-import com.kgg.android.seenear.MyFirebaseMessagingService
 import com.kgg.android.seenear.SignupActivity
 import com.kgg.android.seenear.SplashActivity
 import com.kgg.android.seenear.UserActivity.usermain.UserMainActivity
@@ -24,28 +19,6 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityIntroBinding.inflate(layoutInflater)
-
-
-//        FirebaseApp.initializeApp(this)
-        // 어플 접속 시 FCM token 발급
-
-//
-//        val firebaseApp = MyFirebaseMessagingService()
-//
-//        // FCM 토큰을 가져옵니다.
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-//                return@OnCompleteListener
-//            }
-//
-//            // 토큰이 성공적으로 발급된 후 서버로 전송
-//            val token = task.result
-//            Log.d(TAG, "FCM registration token: $token")
-//            if (token != null) {
-//                firebaseApp.onNewToken(token)
-//            }
-//        })
 
 
         setContentView(binding.root)
@@ -103,7 +76,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if(System.currentTimeMillis() - lastTimeBackPressed >= 1500) {
             lastTimeBackPressed = System.currentTimeMillis()
-            Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Press the 'back' button again to exit.", Toast.LENGTH_SHORT).show()
         } else{
             finishAffinity()
         }

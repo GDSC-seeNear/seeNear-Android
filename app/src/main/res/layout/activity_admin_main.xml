@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="로그아웃"
+        android:text="Log Out"
         android:textColor="@color/theme_green3"
         android:textSize="12dp"
         android:textStyle="bold"
@@ -32,30 +32,32 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/myName_text"
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
+            android:text="User List of"
             android:textColor="#10542F"
             android:textSize="24dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/myName_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="보호 대상 목록"
+            android:layout_marginBottom="4dp"
             android:textColor="#10542F"
-            android:textSize="24dp"
+            android:textSize="32dp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:layout_marginTop="12dp"
-            android:text="대상자 등록"
-            android:textSize="14dp" />
+            android:text="Senior registration"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

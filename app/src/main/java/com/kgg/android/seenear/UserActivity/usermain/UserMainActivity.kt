@@ -5,10 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kgg.android.seenear.App
@@ -20,6 +19,7 @@ import com.kgg.android.seenear.UserActivity.usermodify.medicine.medicineInquiry.
 import com.kgg.android.seenear.databinding.ActivityMainBinding
 import com.kgg.android.seenear.network.RetrofitRepository
 import com.kgg.android.seenear.network.data.registerResponse
+import java.util.*
 
 class UserMainActivity : AppCompatActivity() {
 
@@ -40,6 +40,12 @@ class UserMainActivity : AppCompatActivity() {
         val repository = RetrofitRepository()
         val viewModelFactory = UserMainViewModelFactory(repository)
 
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentDate = String.format("%04d-%02d-%02d", year, month, day)
+
         viewModel = ViewModelProvider(this,viewModelFactory).get(UserMainViewModel::class.java)
 
         val dialog = LoadingDialog(this)
@@ -48,7 +54,7 @@ class UserMainActivity : AppCompatActivity() {
             if (it.name != null){
                 userInfo = it
                 App.prefs.id = it.id
-                binding.userNameText.text = it.name + " 님의"
+                binding.userNameText.text = it.name + "?"
                 dialog.dismiss()
             }
             else{
@@ -63,9 +69,6 @@ class UserMainActivity : AppCompatActivity() {
             dialog.dismiss()
         })
 
-
-        // 테스트용 만료된 accessToken
-        // eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWVOZWFyIiwiaWF0IjoxNjc5NzI5MDc1LCJleHAiOjE2Nzk3MzI2NzUsImlkIjo3LCJ1dWlkIjoiMWYzNTM2NjMtZjY2NC00OTgwLWFiMjEtZTRmOGRiNmE2YzQ5Iiwicm9sZSI6IkVMREVSTFkifQ.wsa2T0Ja8Grd0YOX3kcffP18Y1KWrfe23RnveJArRfk
 
         App.prefs.accessToken?.let { viewModel.tokenTest(it) }
 

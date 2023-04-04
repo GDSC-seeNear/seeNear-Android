@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="챗봇 관리"
+            android:text="Medication Information"
             android:textColor="#10542F"
             android:textSize="24dp"
             android:textStyle="bold"
@@ -67,7 +67,7 @@
                     android:id="@+id/medicineCreateBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="약 복용 정보 등록"
+                    android:text="Add Medication "
                     android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -76,17 +76,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <CheckedTextView
-                android:id="@+id/medicine_text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="약 복용 정보"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/medicineCreate" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -97,7 +86,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/medicine_text2">
+                app:layout_constraintTop_toBottomOf="@+id/medicineCreate">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"

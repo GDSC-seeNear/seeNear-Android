@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Typeface
 import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.icu.util.MeasureUnit.BYTE
 import android.os.Build
@@ -78,7 +80,7 @@ class UserChatActivity : AppCompatActivity() {
         binding = ActivityUserChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val time = System.currentTimeMillis()
-        val dateFormat = SimpleDateFormat(("yyyy년 MM월 dd일 E요일"), Locale("ko", "KR"))
+        val dateFormat = SimpleDateFormat(("yyyy-MM-dd일"), Locale("ko", "KR"))
         val timeFormat = SimpleDateFormat(("HH:mm"), Locale("ko", "KR"))
         val curDate = dateFormat.format(Date(time)).toString()
         val curTime = timeFormat.format(Date(time)).toString()
@@ -153,6 +155,9 @@ class UserChatActivity : AppCompatActivity() {
                     val newSize = currentSize + 2
                     textSize = newSize
                     adapter.notifyDataSetChanged()
+                    // 레이아웃 매니저의 requestLayout() 메소드를 호출하여 뷰의 높이를 다시 계산합니다.
+                    binding.recyclerView.itemAnimator = null
+                    binding.recyclerView.layoutManager?.requestLayout()
                 }
             }
         }
@@ -165,6 +170,9 @@ class UserChatActivity : AppCompatActivity() {
                     val newSize = currentSize - 2
                     textSize = newSize
                     adapter.notifyDataSetChanged()
+                    // 레이아웃 매니저의 requestLayout() 메소드를 호출하여 뷰의 높이를 다시 계산합니다.
+                    binding.recyclerView.itemAnimator = null
+                    binding.recyclerView.layoutManager?.requestLayout()
                 }
             }
 
@@ -203,9 +211,13 @@ class UserChatActivity : AppCompatActivity() {
         chatAdapter = ChatAdapter(this)
         binding.recyclerView.adapter = chatAdapter
 
+        binding.recyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool())
+
+
         val lm = LinearLayoutManager(this)
+        lm.recycleChildrenOnDetach = true // 뷰의 높이 초기화
         binding.recyclerView.layoutManager = lm
-        binding.recyclerView.setHasFixedSize(false)
+        binding.recyclerView.setHasFixedSize(true)
 
         Log.d("datas in recycler", datas.toString())
 
@@ -218,7 +230,7 @@ class UserChatActivity : AppCompatActivity() {
     }
 
     companion object{
-        var textSize = 14f
+        var textSize = 26f
         var bool = true
     }
 
@@ -320,12 +332,17 @@ class UserChatActivity : AppCompatActivity() {
                         && bool){
                         radioGroup.visibility = View.VISIBLE
                     }
-                    else
+                    else{
                         radioGroup.visibility = View.GONE
-                    my_message.visibility = View.GONE
+                    }
+
+
                     partner_message.visibility = View.VISIBLE
-                    loading_bar.visibility = View.GONE
                     partner_message_text.text = item.content
+                    loading_bar.visibility = View.GONE
+                    my_message.visibility = View.GONE
+
+
                     if (item.content.equals("loading...")){
                         partner_message_text.visibility = View.GONE
                         loading_bar.visibility = View.VISIBLE
@@ -369,7 +386,7 @@ class UserChatActivity : AppCompatActivity() {
     private fun recognitionListener() = object : RecognitionListener {
 
         override fun onReadyForSpeech(params: Bundle?) {
-            Toast.makeText(this@UserChatActivity, "음성인식을 시작합니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@UserChatActivity, "Starting voice recognition.", Toast.LENGTH_SHORT).show()
             binding.loadingBar.visibility = View.VISIBLE
             binding.STTButton.visibility = View.GONE
             binding.chatContent.isFocusable = false
@@ -391,7 +408,7 @@ class UserChatActivity : AppCompatActivity() {
         override fun onBeginningOfSpeech() {}
 
         override fun onEndOfSpeech() {
-            Toast.makeText(this@UserChatActivity, "음성인식을 종료합니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@UserChatActivity, "Ending voice recognition.", Toast.LENGTH_SHORT).show()
             binding.loadingBar.visibility = View.GONE
             binding.STTButton.visibility = View.VISIBLE
             if (datas.size>0)
@@ -403,7 +420,7 @@ class UserChatActivity : AppCompatActivity() {
 
         override fun onError(error: Int) {
             when(error) {
-                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> Toast.makeText(this@UserChatActivity, "권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
+                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> Toast.makeText(this@UserChatActivity, "Please grant the permission.", Toast.LENGTH_SHORT).show()
             }
             binding.loadingBar.visibility = View.GONE
             binding.STTButton.visibility = View.VISIBLE

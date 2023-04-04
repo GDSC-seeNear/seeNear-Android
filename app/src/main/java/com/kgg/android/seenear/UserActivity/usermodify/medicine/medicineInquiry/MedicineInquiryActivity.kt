@@ -44,7 +44,7 @@ class MedicineInquiryActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d("lifecycle!!!", "onCreate")
 
-        binding.userName.text = intent.getStringExtra("name") + " 님의"
+        binding.userName.text = intent.getStringExtra("name") + "'s"
 
         elderlyId = intent.getIntExtra("elderlyId", 0)
 
@@ -129,12 +129,12 @@ class MedicineInquiryActivity : AppCompatActivity() {
                 medicine_name.text = item.name
 
                 when(item.period){
-                    24 -> medicine_day.text = "1일 1회"
-                    12 -> medicine_day.text = "1일 2회"
-                    8 -> medicine_day.text = "1일 3회"
-                    24 * 2 -> medicine_day.text = "2일 1회"
-                    24 * 3 -> medicine_day.text = "3일 1회"
-                    24 * 7 -> medicine_day.text = "일주일 1회"
+                    24 -> medicine_day.text = "Once a day"
+                    12 -> medicine_day.text = "Twice a day"
+                    8 -> medicine_day.text = "Three times a day"
+                    24 * 2 -> medicine_day.text = "Once every 2 days"
+                    24 * 3 -> medicine_day.text = "Once every 3 days"
+                    24 * 7 -> medicine_day.text = "Once a week"
                 }
 
                 medicine_deleteBtn.setOnClickListener {

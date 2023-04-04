@@ -76,7 +76,7 @@ class AdminDetailActivity : AppCompatActivity() {
                 age--
             }
 
-            binding.profileBirthDetail.text = "만 "+ age.toString() +"세"
+            binding.profileBirthDetail.text = "Age "+ age.toString()
             binding.profileAddressDetail.text = it.addressDetail
             elderly_id = it.id!!
             name = it.name!!
