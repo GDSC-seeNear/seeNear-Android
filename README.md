@@ -77,4 +77,4 @@ The caregiver receives the user's answers in the form of a report with statistic
 </table> 
 
 ### download
-(https://github.com/GDSC-seeNear/FE/releases/tag/v1.0.0)
+[Download APK](https://github.com/GDSC-seeNear/FE/releases/tag/v1.0.0)
