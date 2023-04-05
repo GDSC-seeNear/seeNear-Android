@@ -9,7 +9,7 @@ So SeeNear aims to provide the elderly with periodic alarms and chatbots through
 </br>
 ## Feature
 ### Sign up  
-SeeNear uses a phone number to sign up for seniors, and we also use phone numbers to link seniors and their caregivers' accounts. This is to accommodate seniors who may not be familiar with OAuth like email.   
+SeeNear uses a phone number to sign up for seniors, and we also use phone numbers to link seniors and their caregivers' accounts. This is to accommodate seniors who may not be familiar with OAuth like email.
 </br>
 ### User
 Users are asked questions about their health or psychological state through three alarms: morning, noon, and evening. Important but simple questions are answered by checking an O or X through a checkbox. If the user needs to talk about a specific case, they can answer the question with their voice through the Speech-to-Text API. The chatbot will then give the appropriate answer, and the user's input will be delivered to caregiver in the form of a report.
