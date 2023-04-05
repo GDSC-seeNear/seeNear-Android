@@ -19,7 +19,7 @@ The caregiver receives the user's answers in the form of a report with statistic
 
 
 ## Demo Video
-[![SeeNear](https://user-images.githubusercontent.com/54880474/229173623-2b5241ae-dc6c-488f-8b63-a9108537ed76.jpg)][https://youtu.be/JpiwWp_myq8]
+[![SeeNear](https://user-images.githubusercontent.com/54880474/229173623-2b5241ae-dc6c-488f-8b63-a9108537ed76.jpg)](https://youtu.be/JpiwWp_myq8)
 </br>
 
 ## Screen
